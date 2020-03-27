@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
  * @Markus Gerdtsson
  */
 public class client1 {
-
+    // Martin
     private String ip;
     private int port;
     private Socket socket;
