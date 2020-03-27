@@ -1,0 +1,21 @@
+What is H20?
+1) Cocaine
+2) Milk
+3) Water
+4) Coffee
+3
+Can this Java-program be written better?
+1) Nah
+2) Hell yes!
+2
+Who teaches UXdesign at our university?
+1) Dipak
+2) Susan
+3) Jane
+1
+Which Countries share a border with Switzerland?
+1) France, Belgium, Spain and Bulgaria
+2) France, Italy, Germany and Belgium
+3) France, Italy, Germany and Austria
+4) France, Spain, Slovenia and Bulgaria
+3
