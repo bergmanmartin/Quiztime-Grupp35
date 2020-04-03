@@ -1,5 +1,7 @@
 package Controll;
 
+import TiuzTimeView.Gameface;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -14,9 +16,11 @@ public class Client {
     private String ip;
     private int port;
     private Socket socket;
+    private Gameface gameface;
 
     public Client(String ip, int port){
 
+        this.gameface = new Gameface();
         this.ip = ip;
         this.port = port;
 
@@ -41,11 +45,16 @@ public class Client {
 
                 DataInputStream dis = new DataInputStream(socket.getInputStream());
 
+                String[] s = new String[5];
+
                 while(true) {
 
-                    String a = dis.readUTF();
+                    for (int i = 0; i <5; i++){
+                        s[i] = dis.readUTF();
+                    }
 
-                    System.out.println(a);
+                    gameface.setQuestion(s[0],s[1],s[2],s[3],s[4]);
+
                 }
 
             } catch (IOException ex) {

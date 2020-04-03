@@ -24,7 +24,7 @@ public class Server {
     public void readFromFile(){
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("files/Questions.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("files/Questions"));
 
             for (int i = 0; i < 21; i++) {
                 namn[i] = reader.readLine();
@@ -97,20 +97,16 @@ public class Server {
 
                     dos = new DataOutputStream(socket.getOutputStream());
 
-                    for(int i = 0; i<21;i++){
+                    for(int i = 0; i<5;i++){
 
                         dos.writeUTF(namn[i]);
 
-                        Thread.sleep(2000);
-
-
                     }
 
-
-
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
             }
 
 
@@ -141,7 +137,5 @@ public class Server {
          */
     }
 
-
-}
 
 
