@@ -44,6 +44,4 @@ public class clientGUI extends JFrame {
 
 
     }
-
-
 }
