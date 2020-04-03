@@ -1,3 +1,5 @@
+package Controll;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,11 +10,11 @@ import java.util.ArrayList;
  * @project P1
  * @Markus Gerdtsson
  */
-public class server {
+public class Server {
     private String[] namn = new String[21];
 
 
-    public server(int port) throws IOException {
+    public Server(int port) throws IOException {
 
         readFromFile();
 

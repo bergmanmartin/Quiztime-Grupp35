@@ -1,3 +1,5 @@
+package Controll;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -7,13 +9,13 @@ import java.net.UnknownHostException;
  * @project P1
  * @Markus Gerdtsson
  */
-public class client1 {
+public class Client {
     // Martin
     private String ip;
     private int port;
     private Socket socket;
 
-    public client1(String ip, int port){
+    public Client(String ip, int port){
 
         this.ip = ip;
         this.port = port;
@@ -44,9 +46,9 @@ public class client1 {
                     String a = dis.readUTF();
 
                     System.out.println(a);
-                    }
+                }
 
-                } catch (IOException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }

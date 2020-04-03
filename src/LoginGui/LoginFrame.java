@@ -1,7 +1,5 @@
 package LoginGui;
 
-import sample.Controller;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -36,7 +34,7 @@ public class LoginFrame extends JPanel {
 
     private LoginController controller;
 
-    public LoginFrame(LoginController controller) {
+    public LoginFrame() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         settingImagePanel();
         settingSignInPanel();
@@ -106,7 +104,8 @@ public class LoginFrame extends JPanel {
 
 
     public static void main(String[] args) {
-     LoginFrame frame = new LoginFrame(Controller controller);
+
+     LoginFrame frame = new LoginFrame();
     }
 
 
