@@ -1,7 +1,6 @@
 package LoginGui;
 
 
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -48,7 +47,6 @@ public class LoginFrame extends JPanel {
 
         user = new User(username, userPicture);
         this.controller = controller;
-
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         settingImagePanel();
         settingSignInPanel();
@@ -121,13 +119,15 @@ public class LoginFrame extends JPanel {
         return loginTf.getText();
     }
 
-    public void buttonActions() {
+
+    public void buttonActions () {
         loginBtn.addActionListener(e -> {
             controller.invalidUsername();
             arrayList.add(username);
-
-        });
+            });
 
     }
 
 }
+
+

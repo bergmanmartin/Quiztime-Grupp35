@@ -1,3 +1,5 @@
+package Controll;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,11 +10,11 @@ import java.util.ArrayList;
  * @project P1
  * @Markus Gerdtsson
  */
-public class server {
+public class Server {
     private String[] namn = new String[21];
 
 
-    public server(int port) throws IOException {
+    public Server(int port) throws IOException {
 
         readFromFile();
 
@@ -22,7 +24,7 @@ public class server {
     public void readFromFile(){
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("files/Questions.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("files/Questions"));
 
             for (int i = 0; i < 21; i++) {
                 namn[i] = reader.readLine();
@@ -95,20 +97,16 @@ public class server {
 
                     dos = new DataOutputStream(socket.getOutputStream());
 
-                    for(int i = 0; i<21;i++){
+                    for(int i = 0; i<5;i++){
 
                         dos.writeUTF(namn[i]);
 
-                        Thread.sleep(2000);
-
-
                     }
 
-
-
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
             }
 
 
@@ -139,7 +137,5 @@ public class server {
          */
     }
 
-
-}
 
 
