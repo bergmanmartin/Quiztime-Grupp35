@@ -1,41 +1,28 @@
+package Controller;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * @Created 11/02/2020
  * @project P1
  * @Markus Gerdtsson
  */
-public class server {
-    private String[] namn = new String[21];
+public class Server {
 
 
-    public server(int port) throws IOException {
+    private Questionreader qr = new Questionreader();
 
-        readFromFile();
+
+    public Server(int port) throws IOException {
+
+        qr.readFromFile();
 
         new Connection(port).start();
     }
 
-    public void readFromFile(){
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("files/Questions.txt"));
-
-            for (int i = 0; i < 21; i++) {
-                namn[i] = reader.readLine();
-            }
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private class Connection extends Thread{
         private int port;
@@ -95,20 +82,19 @@ public class server {
 
                     dos = new DataOutputStream(socket.getOutputStream());
 
-                    for(int i = 0; i<21;i++){
+                    for(int i = 0; i<5;i++){
 
+
+
+                        //////HÄR SKA OBJEKTET SÄTTAS IN
                         dos.writeUTF(namn[i]);
-
-                        Thread.sleep(2000);
-
 
                     }
 
-
-
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
             }
 
 
@@ -139,7 +125,5 @@ public class server {
          */
     }
 
-
-}
 
 
