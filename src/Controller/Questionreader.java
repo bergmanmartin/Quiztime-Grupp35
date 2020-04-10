@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.QuestionModel.Questions;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,32 +14,35 @@ import java.io.IOException;
  */
 public class Questionreader {
 
+    private Questions[] questions;
 
-    private String[] namn = new String[21];
-
-
-    public Questionreader{
-
-
-
-    }
-
-
-    public void readFromFile(){
+    public Questionreader(){
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("files/Questions"));
 
-            for (int i = 0; i < 21; i++) {
-                namn[i] = reader.readLine();
+            int numOfLines = Integer.parseInt(reader.readLine());
+
+            questions = new Questions[numOfLines];
+
+            for (int i = 0; i < numOfLines; i++){
+
+                Questions newQuestion = new Questions(reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine());
+
+                questions[i] = newQuestion;
+
             }
 
 
-        } catch (FileNotFoundException e) {
+    } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public Questions[] getQuestions() {
+        return questions;
     }
 }

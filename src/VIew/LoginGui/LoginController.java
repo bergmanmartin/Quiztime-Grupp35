@@ -1,5 +1,7 @@
 package VIew.LoginGui;
 
+import Model.Users.User;
+
 import javax.swing.*;
 import java.util.ArrayList;
 

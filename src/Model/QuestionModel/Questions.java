@@ -24,7 +24,6 @@ public class Questions implements Serializable {
         this.alternative3 = alternative3;
         this.alternative4 = alternative4;
         this.correctAlternative = correctAlternative;
-
     }
 
     public String getQuestion() {

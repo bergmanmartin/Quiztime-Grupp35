@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.QuestionModel.Questions;
 import VIew.GameFrame.Gameface;
 
 import java.io.*;
@@ -17,6 +18,7 @@ public class Client {
     private int port;
     private Socket socket;
     private Gameface gameface;
+    private Questions[] questions = new Questions[10];
 
     public Client(String ip, int port){
 
@@ -39,36 +41,49 @@ public class Client {
 
     private class ClientGo extends Thread{
 
+        private int counter = 0;
+
         public void run(){
 
-            try{
+            try {
 
-                DataInputStream dis = new DataInputStream(socket.getInputStream());
+                ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-                String[] s = new String[5];
+                for (int i = 0; i < 10; i++) {
+
+                    questions[i] = (Questions) inputStream.readObject();
+                }
+
 
                 while(true) {
 
-                    for (int i = 0; i <5; i++){
-                        s[i] = dis.readUTF();
-                    }
+                    newQuestions(counter);
+                    counter += 1;
 
-                    gameface.setQuestion(s[0],s[1],s[2],s[3],s[4]);
+                    sleep(10000);
 
                 }
 
-            } catch (IOException ex) {
-                ex.printStackTrace();
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
 
+        public void newQuestions(int counter){
+
+            gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
+
+
+        }
+
+
     }
 
-    public void Ready(){
-
-
-
-    }
 
 
 

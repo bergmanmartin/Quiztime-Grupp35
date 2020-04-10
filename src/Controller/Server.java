@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.QuestionModel.Questions;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -11,13 +13,22 @@ import java.net.Socket;
  */
 public class Server {
 
+    private String[] namn = new String[21];
 
-    private Questionreader qr = new Questionreader();
+    private Questionreader qr;
+
+    private Questions[] gameQuestions;
+
+
 
 
     public Server(int port) throws IOException {
 
-        qr.readFromFile();
+        qr = new Questionreader();
+
+        gameQuestions = qr.getQuestions();
+
+
 
         new Connection(port).start();
     }
@@ -80,14 +91,14 @@ public class Server {
 
                 try {
 
-                    dos = new DataOutputStream(socket.getOutputStream());
+                    //dos = new DataOutputStream(socket.getOutputStream());
 
-                    for(int i = 0; i<5;i++){
+                    ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
+                    for(int i = 0; i<10; i++){
 
-
-                        //////HÄR SKA OBJEKTET SÄTTAS IN
-                        dos.writeUTF(namn[i]);
+                        outputStream.writeObject(gameQuestions[i]);
+                        outputStream.flush();
 
                     }
 
@@ -95,10 +106,8 @@ public class Server {
                     e.printStackTrace();
                 }
             }
-            }
-
-
         }
+    }
 
 
         /*public void sendQuestions(){
