@@ -30,9 +30,8 @@ public class LoginController {
         String username = loginFrame.getUsernname();
 
         for (int i = 0; i < username.length(); i++) {
-            if (username.charAt(i) != ) {
 
-            }
+            
         }
     }
 
