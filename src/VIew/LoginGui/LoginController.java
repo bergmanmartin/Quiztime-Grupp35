@@ -1,4 +1,4 @@
-package LoginGui;
+package VIew.LoginGui;
 
 public class LoginController {
 

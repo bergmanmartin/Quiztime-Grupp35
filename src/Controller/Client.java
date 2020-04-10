@@ -1,6 +1,6 @@
-package Controll;
+package Controller;
 
-import TiuzTimeView.Gameface;
+import VIew.GameFrame.Gameface;
 
 import java.io.*;
 import java.net.Socket;

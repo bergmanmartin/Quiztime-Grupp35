@@ -1,4 +1,6 @@
-package LoginGui;
+package VIew.LoginGui;
+
+import Model.Users.User;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

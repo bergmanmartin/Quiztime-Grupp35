@@ -1,4 +1,4 @@
-package TiuzTimeView;
+package VIew.GameFrame;
 
 /**
  * @Created 11/02/2020

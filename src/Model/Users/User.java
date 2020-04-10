@@ -1,8 +1,12 @@
-package LoginGui;
+package Model.Users;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
+
+/**
+ * @Created 11/02/2020
+ * @project
+ * @Markus Gerdtsson
+ */
 
 public class User {
     private String username;
