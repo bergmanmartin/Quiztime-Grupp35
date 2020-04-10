@@ -5,6 +5,9 @@ import Model.Users.User;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,14 +26,17 @@ public class LoginFrame extends JPanel {
 
     private ImageIcon image;
 
-    private ArrayList<String> arrayList = new ArrayList<String>();
-
     private JTextField loginTf = new JTextField();
 
     private JPanel pnlImage = new JPanel();
     private JPanel pnlImageBtn = new JPanel();
     private JPanel pnlLoginTf = new JPanel();
     private JPanel pnlLoginBtn = new JPanel();
+
+
+    private JLabel imageLbl = new JLabel();
+
+
 
     private JFrame loginFrame;
 
@@ -85,6 +91,9 @@ public class LoginFrame extends JPanel {
         pnlImage.setMaximumSize(new Dimension(120, 120));
         pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
 
+        pnlImage.add(imageLbl);
+
+
         pnlImageBtn.setLayout(new BoxLayout(pnlImageBtn, BoxLayout.X_AXIS));
         pnlImageBtn.setPreferredSize(new Dimension(100, 40));
         pnlImageBtn.add(imageBtn);
@@ -103,7 +112,8 @@ public class LoginFrame extends JPanel {
         pnlLoginTf.setPreferredSize(new Dimension(300, 40));
         pnlLoginTf.setMaximumSize(new Dimension(300, 40));
 
-        loginTf.setPreferredSize(new Dimension(290, 20));
+        loginTf.setPreferredSize(new Dimension(190, 20));
+        loginTf.setDocument(new JTextFieldLimit(10));
         pnlLoginTf.add(loginTf);
         add(Box.createVerticalStrut(20));
         add(pnlLoginTf);
@@ -125,10 +135,43 @@ public class LoginFrame extends JPanel {
 
     public void buttonActions () {
         loginBtn.addActionListener(e -> {
-            controller.invalidUsername();
-            arrayList.add(username);
-            });
+            controller.emptyUsername();
 
+            });
+        imageBtn.addActionListener(e -> {
+            controller.selectedImage();
+            setImageLbl();
+
+        });
+
+    }
+
+    private class JTextFieldLimit extends PlainDocument {
+        private int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+
+        public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+            if (str == null) return;
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
+    }
+
+    public void setImageLbl() {
+        ImageIcon userPicture = new ImageIcon(controller.selectedImage());
+        Image image = userPicture.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+        userPicture = new ImageIcon(image);
+        imageLbl.setIcon(userPicture);
+
+    }
+    public ImageIcon getImage() {
+        return userPicture;
     }
 }
 
