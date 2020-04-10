@@ -2,9 +2,11 @@ package VIew.LoginGui;
 
 import Model.Users.User;
 
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -13,10 +15,13 @@ import java.util.HashMap;
  * @author martinbergman.
  */
 public class LoginFrame extends JPanel {
+    private ImageIcon userPicture;
     private JButton loginBtn = new JButton("Login");
     private JButton imageBtn = new JButton("Select image");
 
     private ImageIcon image;
+
+    private ArrayList<String> arrayList = new ArrayList<String>();
 
     private JTextField loginTf = new JTextField();
 
@@ -30,13 +35,20 @@ public class LoginFrame extends JPanel {
 
     private int score;
 
+    private User user;
+
+    private String username;
+
     private JFileChooser imageChooser;
 
     private HashMap<User, Integer> userList = new HashMap<User, Integer>();
 
     private LoginController controller;
 
-    public LoginFrame() {
+    public LoginFrame(LoginController controller) {
+
+        user = new User(username, userPicture);
+        this.controller = controller;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         settingImagePanel();
         settingSignInPanel();
@@ -44,6 +56,7 @@ public class LoginFrame extends JPanel {
         setPreferredSize(new Dimension(600, 400));
 
         initWinow();
+        buttonActions();
 
 
 
@@ -104,11 +117,19 @@ public class LoginFrame extends JPanel {
         add(pnlLoginBtn);
     }
 
-
-    public static void main(String[] args) {
-
-     LoginFrame frame = new LoginFrame();
+    public String getUsernname() {
+        return loginTf.getText();
     }
 
 
+    public void buttonActions () {
+        loginBtn.addActionListener(e -> {
+            controller.invalidUsername();
+            arrayList.add(username);
+            });
+
+    }
+
 }
+
+
