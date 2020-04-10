@@ -1,4 +1,6 @@
-package LoginGui;
+package VIew.LoginGui;
+
+import Model.Users.User;
 
 import javax.swing.*;
 import java.io.File;
@@ -28,9 +30,8 @@ public class LoginController {
         String username = loginFrame.getUsernname();
 
         for (int i = 0; i < username.length(); i++) {
-            if (username.charAt(i) != ) {
 
-            }
+            
         }
     }
 

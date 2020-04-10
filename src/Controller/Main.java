@@ -1,7 +1,4 @@
-package Controll;
-
-import Controll.Server;
-import TiuzTimeView.Gameface;
+package Controller;
 
 import java.io.IOException;
 
