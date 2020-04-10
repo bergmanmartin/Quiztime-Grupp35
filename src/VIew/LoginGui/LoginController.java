@@ -34,15 +34,6 @@ public class LoginController {
         }
     }
 
-    public void selectImageMessage() {
-       // if ()
-    }
-
-
-
-    public void usernameAlreadyExists() {
-
-    }
 
     public User createUser() {
         User user = new User(loginFrame.getUsernname(), loginFrame.getImage());
