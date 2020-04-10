@@ -1,4 +1,4 @@
-package TiuzTimeView;
+package VIew.TiuzTimeView;
 
 import javax.swing.*;
 import java.awt.*;

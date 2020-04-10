@@ -1,9 +1,10 @@
-package Controll;
+package Controller;
+
+import Model.QuestionModel.Questions;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * @Created 11/02/2020
@@ -11,33 +12,28 @@ import java.util.ArrayList;
  * @Markus Gerdtsson
  */
 public class Server {
+
     private String[] namn = new String[21];
+
+    private Questionreader qr;
+
+    private Questions[] gameQuestions;
+
+
 
 
     public Server(int port) throws IOException {
 
-        readFromFile();
+        qr = new Questionreader();
+
+        gameQuestions = qr.getQuestions();
+
+
 
         new Connection(port).start();
     }
 
-    public void readFromFile(){
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("files/Questions"));
-
-            for (int i = 0; i < 21; i++) {
-                namn[i] = reader.readLine();
-            }
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private class Connection extends Thread{
         private int port;
@@ -95,11 +91,14 @@ public class Server {
 
                 try {
 
-                    dos = new DataOutputStream(socket.getOutputStream());
+                    //dos = new DataOutputStream(socket.getOutputStream());
 
-                    for(int i = 0; i<5;i++){
+                    ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
-                        dos.writeUTF(namn[i]);
+                    for(int i = 0; i<10; i++){
+
+                        outputStream.writeObject(gameQuestions[i]);
+                        outputStream.flush();
 
                     }
 
@@ -107,10 +106,8 @@ public class Server {
                     e.printStackTrace();
                 }
             }
-            }
-
-
         }
+    }
 
 
         /*public void sendQuestions(){

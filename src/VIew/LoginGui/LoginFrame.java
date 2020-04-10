@@ -1,4 +1,6 @@
-package LoginGui;
+package VIew.LoginGui;
+
+import Model.Users.User;
 
 
 import javax.swing.*;
@@ -16,6 +18,8 @@ import java.util.HashMap;
  * @author martinbergman.
  */
 public class LoginFrame extends JPanel {
+
+
     private ImageIcon userPicture;
     private JButton loginBtn = new JButton("Login");
     private JButton imageBtn = new JButton("Select image");
@@ -29,7 +33,9 @@ public class LoginFrame extends JPanel {
     private JPanel pnlLoginTf = new JPanel();
     private JPanel pnlLoginBtn = new JPanel();
 
+
     private JLabel imageLbl = new JLabel();
+
 
 
     private JFrame loginFrame;
@@ -167,7 +173,6 @@ public class LoginFrame extends JPanel {
     public ImageIcon getImage() {
         return userPicture;
     }
-
 }
 
 

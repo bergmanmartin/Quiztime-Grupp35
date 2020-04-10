@@ -1,14 +1,11 @@
-package TiuzTimeView;
+package VIew.TiuzTimeView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SouthWestPanel extends JPanel {
 
 //    private     Controller controller;
-
     private JRadioButton radioButtonUtmanaEnKompis = new JRadioButton("Challange a friend");
     private JRadioButton radioButtonUtmanaDigSjalv = new JRadioButton("Challande the computer/yourself");
     private ButtonGroup ButtonGroupRadio = new ButtonGroup();

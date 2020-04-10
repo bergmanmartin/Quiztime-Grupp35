@@ -1,4 +1,4 @@
-package TiuzTimeView;
+package VIew.GameFrame;
 
 /**
  * @Created 11/02/2020
@@ -53,8 +53,6 @@ public class Gameface extends JFrame {
         centerPanel.setLayout(new GridBagLayout());
         centerPanel.add(jProgressBar);
         add(centerPanel, BorderLayout.CENTER);
-        FillThread fillThread = new FillThread();
-        fillThread.start();
     }
 
     public void setSouthPanel() {
@@ -75,17 +73,17 @@ public class Gameface extends JFrame {
 
 
         public void run() {
-            int i = 0;
-            try {
-                while (i <= 100) {
-                    // fill the menu bar
-                    jProgressBar.setValue(i + 10);
+                int i = 0;
+                try {
+                    while (i <= 100) {
+                        // fill the menu bar
+                        jProgressBar.setValue(i);
 
-                    // delay the thread
-                    Thread.sleep(1000);
-                    i += 5;
-                }
-            } catch (Exception e) {
+                        // delay the thread
+                        Thread.sleep(1000);
+                        i += 10;
+                    }
+                } catch (Exception e) {
             }
 
 
@@ -99,6 +97,9 @@ public class Gameface extends JFrame {
         secondAlternative.setText(alternative2);
         thirdAlternative.setText(alternative3);
         forthAlternative.setText(alternative4);
+
+        FillThread fillThread = new FillThread();
+        fillThread.start();
     }
 
 }
