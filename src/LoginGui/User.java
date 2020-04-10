@@ -2,9 +2,10 @@ package LoginGui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class User {
+public class User implements Serializable {
     private String username;
     private ImageIcon userPicture;
 
