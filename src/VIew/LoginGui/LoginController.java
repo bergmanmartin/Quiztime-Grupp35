@@ -28,15 +28,16 @@ public class LoginController {
 
     public void invalidCharacters() {
         String username = loginFrame.getUsernname();
+        int usernameLength = username.length();
 
         for (int i = 0; i < username.length(); i++) {
+            char ch = username.charAt(i);
+            if () {
+
+            }
 
             
         }
-    }
-
-    public void selectImageMessage() {
-       // if ()
     }
 
 
@@ -45,13 +46,13 @@ public class LoginController {
 
     }
 
+
     public User createUser() {
         User user = new User(loginFrame.getUsernname(), loginFrame.getImage());
 
         userlist.add(user);
         return user;
     }
-
 
 
     public String selectedImage() {
