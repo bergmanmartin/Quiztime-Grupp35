@@ -13,6 +13,7 @@ import java.util.HashMap;
  * @author martinbergman.
  */
 public class LoginFrame extends JPanel {
+
     private JButton loginBtn = new JButton("Login");
     private JButton imageBtn = new JButton("Select image");
 
@@ -24,7 +25,6 @@ public class LoginFrame extends JPanel {
     private JPanel pnlImageBtn = new JPanel();
     private JPanel pnlLoginTf = new JPanel();
     private JPanel pnlLoginBtn = new JPanel();
-
 
     private JFrame loginFrame;
 
@@ -108,6 +108,4 @@ public class LoginFrame extends JPanel {
     public static void main(String[] args) {
      LoginFrame frame = new LoginFrame(Controller controller);
     }
-
-
 }
