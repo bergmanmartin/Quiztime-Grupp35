@@ -32,7 +32,7 @@ public class LoginController {
 
         for (int i = 0; i < username.length(); i++) {
             char ch = username.charAt(i);
-            if () {
+            if (ch == 1) {
 
             }
 
