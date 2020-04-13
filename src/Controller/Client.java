@@ -19,6 +19,7 @@ public class Client {
     private Socket socket;
     private Gameface gameface;
     private Questions[] questions = new Questions[10];
+    private int numOfPoints = 0;
 
     public Client(String ip, int port){
 
@@ -58,9 +59,14 @@ public class Client {
                 while(true) {
 
                     newQuestions(counter);
-                    counter += 1;
 
                     sleep(10000);
+
+                    getAlternative(counter);
+
+                    counter += 1;
+
+                    System.out.println(numOfPoints);
 
                 }
 
@@ -77,15 +83,19 @@ public class Client {
         public void newQuestions(int counter){
 
             gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
+        }
 
+        public void getAlternative(int counter){
+
+            System.out.println(gameface.getSelectedButton());
+            System.out.println(questions[counter].getCorrectAlternative());
+
+            if (gameface.getSelectedButton().equals(questions[counter].getCorrectAlternative())){
+                numOfPoints += 1;
+            }
 
         }
 
-
     }
-
-
-
-
 
 }

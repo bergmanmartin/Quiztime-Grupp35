@@ -7,6 +7,8 @@ package VIew.GameFrame;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Gameface extends JFrame {
     //JPanels
@@ -20,6 +22,9 @@ public class Gameface extends JFrame {
     private JButton secondAlternative = new JButton();
     private JButton thirdAlternative = new JButton();
     private JButton forthAlternative = new JButton();
+
+    private JButton selectedButton;
+
     //JProgressbar
     private JProgressBar jProgressBar = new JProgressBar();
 
@@ -35,6 +40,7 @@ public class Gameface extends JFrame {
         setNorthPanel();
         setCenterPanel();
         setSouthPanel();
+        setActionListeners();
 
     }
 
@@ -89,6 +95,9 @@ public class Gameface extends JFrame {
 
 
         }
+
+
+
     }
 
     public void setQuestion(String question1, String alternative1, String alternative2, String alternative3, String alternative4){
@@ -98,8 +107,83 @@ public class Gameface extends JFrame {
         thirdAlternative.setText(alternative3);
         forthAlternative.setText(alternative4);
 
+        if (selectedButton != null){
+            removeOldSelectedButton();
+        }
+
         FillThread fillThread = new FillThread();
         fillThread.start();
+    }
+
+    public void setActionListeners(){
+
+        firstAlternative.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectedButton != null){
+                    removeOldSelectedButton();
+                }
+                selectedButton = firstAlternative;
+                setSelectedButton(selectedButton);
+            }
+
+        });
+
+        secondAlternative.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectedButton != null){
+                    removeOldSelectedButton();
+                }
+                selectedButton = secondAlternative;
+                setSelectedButton(selectedButton);
+            }
+
+        });
+
+        thirdAlternative.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectedButton != null){
+                    removeOldSelectedButton();
+                }
+                selectedButton = thirdAlternative;
+                setSelectedButton(selectedButton);
+            }
+
+        });
+
+        forthAlternative.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectedButton != null){
+                    removeOldSelectedButton();
+                }
+                selectedButton = forthAlternative;
+                setSelectedButton(selectedButton);
+            }
+
+        });
+
+
+
+    }
+
+    public void removeOldSelectedButton(){
+
+        selectedButton.setBackground(null);
+        //selectedButton = null;
+
+    }
+
+    public void setSelectedButton(JButton selectedButton){
+
+        selectedButton.setBackground(Color.GREEN);
+
+    }
+
+    public String getSelectedButton(){
+        return selectedButton.getText();
     }
 
 }
