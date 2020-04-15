@@ -3,6 +3,7 @@ package VIew.LoginGui;
 import Controller.Client;
 import Controller.Server;
 import Model.Users.User;
+import SecondFrame.MainSecondFrame;
 import StartPageGUI.MainFrame;
 
 
@@ -171,7 +172,7 @@ public class LoginFrame extends JPanel {
                 if (filepath == null) {
                     return;
                 } else if (filepath.endsWith(".png") || filepath.endsWith(".jpg")) {
-                    ImageIcon userPicture = new ImageIcon(filepath);
+                    userPicture = new ImageIcon(filepath);
                     Image image = userPicture.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
                     userPicture = new ImageIcon(image);
                     imageLbl.setIcon(userPicture);
@@ -212,11 +213,7 @@ public class LoginFrame extends JPanel {
 
                     User user = new User(loginTf.getText(), userPicture);
 
-                    //MainFrame mainFrame = new MainFrame(user);
-
-                    Server server = new Server(2343);
-                    Client Client = new Client("127.0.0.1", 2343);
-                    //MainFrame mf = new MainFrame(user);
+                    MainSecondFrame mains = new MainSecondFrame(user);
                 }
             }
 

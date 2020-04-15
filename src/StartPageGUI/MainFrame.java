@@ -42,7 +42,7 @@ public class MainFrame extends JFrame {
         setTitle("QuizTime");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(offsetX, offsetY);
-
+        //panel = new JPanel();
         setContentPane(panel);
         pack();
 

@@ -1,6 +1,7 @@
 package Model.Users;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @Created 11/02/2020
@@ -24,6 +25,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public ImageIcon getUserPicture() {
         return userPicture;
     }
