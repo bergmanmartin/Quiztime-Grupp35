@@ -198,12 +198,8 @@ public class LoginFrame extends JPanel {
         }
     }
 
-
-
-
-
-
-
+    //TEST
+    
             public void proceedLogin() throws IOException {
 
                 if (correctName && correctImage == true) {
