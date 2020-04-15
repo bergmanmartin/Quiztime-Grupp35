@@ -19,6 +19,12 @@ public class LoginController {
 
     }
 
+    public boolean checkUsername(String name){
+        boolean match = name.matches("[a-zA-Z0-9]+");
+        return match;
+    }
+
+
 
     public void emptyUsername() {
         if (loginFrame.getUsernname().equals("")) {
@@ -34,14 +40,14 @@ public class LoginController {
         }
     }
 
-
+/*
     public User createUser() {
         User user = new User(loginFrame.getUsernname(), loginFrame.getImage());
 
         userlist.add(user);
         return user;
     }
-
+*/
 
 
     public String selectedImage() {

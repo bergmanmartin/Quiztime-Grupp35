@@ -1,5 +1,7 @@
 package StartPageGUI;
 
+import Model.Users.User;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -7,10 +9,11 @@ public class MainFrame extends JFrame {
     private int width = 600;
     private int height = 600;
 
-    //        Controller controller;
-    MainPanel panel;
+    private User user;
 
-    public MainFrame(/*Controller controller*/) {
+    private MainPanel panel;
+
+    public MainFrame() {
 //        this.controller = controller;
         setupFrame();
     }
@@ -25,7 +28,6 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(offsetX, offsetY);
 
-        panel = new MainPanel(/*controller*/);
         setContentPane(panel);
         pack();
 

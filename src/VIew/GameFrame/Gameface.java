@@ -172,7 +172,6 @@ public class Gameface extends JFrame {
     public void removeOldSelectedButton(){
 
         selectedButton.setBackground(null);
-        //selectedButton = null;
 
     }
 

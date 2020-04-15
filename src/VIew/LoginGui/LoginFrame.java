@@ -1,6 +1,9 @@
 package VIew.LoginGui;
 
+import Controller.Client;
+import Controller.Server;
 import Model.Users.User;
+import StartPageGUI.MainFrame;
 
 
 import javax.swing.*;
@@ -9,6 +12,9 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,25 +42,18 @@ public class LoginFrame extends JPanel {
 
     private JLabel imageLbl = new JLabel();
 
+    private boolean correctImage = false;
+    private boolean correctName = false;
+
 
 
     private JFrame loginFrame;
 
-    private int score;
-
-    private User user;
-
-    private String username;
-
-    private JFileChooser imageChooser;
-
-    private HashMap<User, Integer> userList = new HashMap<User, Integer>();
 
     private LoginController controller;
 
     public LoginFrame(LoginController controller) {
 
-        user = new User(username, userPicture);
         this.controller = controller;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         settingImagePanel();
@@ -133,14 +132,26 @@ public class LoginFrame extends JPanel {
     }
 
 
-    public void buttonActions () {
-        loginBtn.addActionListener(e -> {
-            controller.emptyUsername();
+    public void buttonActions(){
 
-            });
-        imageBtn.addActionListener(e -> {
-            controller.selectedImage();
-            setImageLbl();
+        imageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setImageLbl();
+            }
+        });
+
+
+        loginBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setUserName();
+                try {
+                    proceedLogin();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
 
         });
 
@@ -163,16 +174,52 @@ public class LoginFrame extends JPanel {
         }
     }
 
-    public void setImageLbl() {
-        ImageIcon userPicture = new ImageIcon(controller.selectedImage());
-        Image image = userPicture.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-        userPicture = new ImageIcon(image);
-        imageLbl.setIcon(userPicture);
+    public void setUserName(){
+        if (controller.checkUsername(loginTf.getText()) == true){
+            correctName = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Only numbers and letters are allowed in username.");
+        }
+    }
 
+
+    public void setImageLbl(){
+
+        String filepath = controller.selectedImage();
+
+        if (filepath == null){
+            return;
+        }
+        else if (filepath.endsWith(".png") || filepath.endsWith(".jpg")){
+            ImageIcon userPicture = new ImageIcon(filepath);
+            Image image = userPicture.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            userPicture = new ImageIcon(image);
+            imageLbl.setIcon(userPicture);
+            correctImage = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Only jpg or png fileformat.");
+        }
     }
-    public ImageIcon getImage() {
-        return userPicture;
+
+    public void proceedLogin() throws IOException {
+
+        if (correctName && correctImage == true){
+            loginFrame.setVisible(false);
+
+            User user = new User(loginTf.getText(), userPicture);
+
+            //MainFrame mainFrame = new MainFrame(user);
+
+            Server server = new Server(2343);
+            Client Client = new Client("127.0.0.1", 2343);
+            //MainFrame mf = new MainFrame(user);
+        }
     }
+
+
+
 }
 
 

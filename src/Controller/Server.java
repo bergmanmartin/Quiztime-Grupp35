@@ -13,13 +13,10 @@ import java.net.Socket;
  */
 public class Server {
 
-    private String[] namn = new String[21];
 
     private Questionreader qr;
 
     private Questions[] gameQuestions;
-
-
 
 
     public Server(int port) throws IOException {
