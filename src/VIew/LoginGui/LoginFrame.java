@@ -56,19 +56,16 @@ public class LoginFrame extends JPanel {
 
 
     public LoginFrame(LoginController controller) {
-        loginFrame = new JFrame("Welcome to QuizTime!");
+
         this.controller = controller;
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        loginFrame.add(this);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         settingImagePanel();
         settingSignInPanel();
         settingButtonPanel();
-        loginFrame.setSize(600, 400);
-        loginFrame.pack();
-        loginFrame.setVisible(true);
-        loginFrame.setLocationRelativeTo(null);
-        loginFrame.setResizable(false);
-        
+        setPreferredSize(new Dimension(600, 400));
+        initWindow();
+
+
 
         buttonActions();
     }
@@ -79,12 +76,20 @@ public class LoginFrame extends JPanel {
      * Method for initatilizing the window frame for the loginscreen
      */
 
-
+    private void initWindow() {
+        loginFrame = new JFrame("Welcome to Quiztime!");
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.add(this);
+        loginFrame.pack();
+        loginFrame.setVisible(true);
+        loginFrame.setLocationRelativeTo(null);
+        loginFrame.setResizable(false);
+    }
 
         private void settingImagePanel() {
             pnlImage.setPreferredSize(new Dimension(120, 120));
             pnlImage.setMaximumSize(new Dimension(120, 120));
-            pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
+            //pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
 
             pnlImage.add(imageLbl);
 
