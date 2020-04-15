@@ -13,8 +13,6 @@ public class User {
     private ImageIcon userPicture;
 
 
-
-
     public User(String username, ImageIcon userPicture) {
         this.username = username;
         this.userPicture = userPicture;

@@ -1,7 +1,11 @@
 package StartPageGUI;
 
+
 import VIew.LoginGui.LoginController;
 import VIew.LoginGui.LoginFrame;
+
+import Model.Users.User;
+
 
 import javax.swing.*;
 
@@ -10,12 +14,18 @@ public class MainFrame extends JFrame {
     private int width = 600;
     private int height = 600;
 
+
     //        Controller controller;
     MainPanel panel;
     LoginFrame frame;
     LoginController controller;
 
-    public MainFrame(/*Controller controller*/) {
+    private User user;
+
+
+
+
+    public MainFrame() {
 //        this.controller = controller;
         setupFrame();
         frame = new LoginFrame(controller);
@@ -33,7 +43,6 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(offsetX, offsetY);
 
-        panel = new MainPanel(/*controller*/);
         setContentPane(panel);
         pack();
 

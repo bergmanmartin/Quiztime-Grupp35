@@ -91,6 +91,7 @@ public class Client {
             System.out.println(questions[counter].getCorrectAlternative());
 
             if (gameface.getSelectedButton().equals(questions[counter].getCorrectAlternative())){
+
                 numOfPoints += 1;
             }
 
