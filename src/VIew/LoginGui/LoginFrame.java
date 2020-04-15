@@ -68,8 +68,7 @@ public class LoginFrame extends JPanel {
         loginFrame.setVisible(true);
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setResizable(false);
-
-
+        
 
         buttonActions();
     }
