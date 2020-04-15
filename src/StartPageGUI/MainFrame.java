@@ -1,5 +1,8 @@
 package StartPageGUI;
 
+import VIew.LoginGui.LoginController;
+import VIew.LoginGui.LoginFrame;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -9,10 +12,15 @@ public class MainFrame extends JFrame {
 
     //        Controller controller;
     MainPanel panel;
+    LoginFrame frame;
+    LoginController controller;
 
     public MainFrame(/*Controller controller*/) {
 //        this.controller = controller;
         setupFrame();
+        frame = new LoginFrame(controller);
+
+
     }
 
     //standard settings
@@ -30,6 +38,8 @@ public class MainFrame extends JFrame {
         pack();
 
         setVisible(true);
+
+
     }
     public static void main (String [] args){
         MainFrame mf = new MainFrame();

@@ -1,13 +1,16 @@
 package StartPageGUI;
 
+import VIew.LoginGui.LoginController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class LayoutExample {
+public class LayoutExample extends JFrame {
 
     //private JTextField tField;
     private JTextArea taUserPicture;
+    private LoginController controller;
 
     private JTextArea tArea1;
     private JTextArea tArea2;
@@ -20,14 +23,16 @@ public class LayoutExample {
     private GridBagConstraints gbc;
 
     private Random random;
+    private JFrame frame;
 
-    public LayoutExample() {
+    public LayoutExample(LoginController controller) {
         gbc = new GridBagConstraints();
         random = new Random();
+        this.controller = controller;
     }
 
     private void displayGUI() {
-        JFrame frame = new JFrame("QuiZtime Start");
+        frame = new JFrame("QuiZtime Start");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel contentPane = getPanel();
@@ -84,7 +89,7 @@ public class LayoutExample {
         frame.setContentPane(contentPane);
         frame.pack();
         frame.setLocationByPlatform(true);
-        frame.setVisible(true);
+        //frame.setVisible(false);
     }
 
     private JPanel getPanel() {
@@ -112,11 +117,16 @@ public class LayoutExample {
         return gbc;
     }
 
+    public JFrame getStartPage() {
+        return frame;
+    }
+
     public static void main(String... args) {
+        LoginController controller = new LoginController();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                new LayoutExample().displayGUI();
+                new LayoutExample(controller).displayGUI();
             }
         };
         EventQueue.invokeLater(runnable);

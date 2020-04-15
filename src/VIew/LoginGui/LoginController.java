@@ -1,6 +1,8 @@
 package VIew.LoginGui;
 
 import Model.Users.User;
+import StartPageGUI.LayoutExample;
+
 
 import javax.swing.*;
 import java.io.File;
@@ -12,31 +14,39 @@ public class LoginController {
     private ArrayList<User> userlist = new ArrayList<User>();
     private String file;
     private String filePath;
+    private LayoutExample startPage;
+    private LoginPanel loginPanel;
+
 
 
     public LoginController (){
         loginFrame = new LoginFrame(this);
+        loginPanel = new LoginPanel(this);
+
 
     }
 
+    public void setupStartPageView() {
+        startPage = new LayoutExample(this);
+        startPage.setVisible(true);
+        loginFrame.dispose();
+    }
 
     public void emptyUsername() {
-        if (loginFrame.getUsernname().equals("")) {
+        if (loginPanel.getUsernname().equals("")) {
             JOptionPane.showMessageDialog(null, "Invalid username");
         }
     }
 
     public void invalidCharacters() {
-        String username = loginFrame.getUsernname();
-
+        String username = loginPanel.getUsernname();
         for (int i = 0; i < username.length(); i++) {
-
         }
     }
 
 
     public User createUser() {
-        User user = new User(loginFrame.getUsernname(), loginFrame.getImage());
+        User user = new User(loginPanel.getUsernname(), loginPanel.getImage());
 
         userlist.add(user);
         return user;
@@ -56,7 +66,10 @@ public class LoginController {
         return filePath;
     }
 
+
+
     public User getUser() {
         return user;
     }
+
 }
