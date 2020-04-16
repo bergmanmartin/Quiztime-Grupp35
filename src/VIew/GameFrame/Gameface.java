@@ -165,8 +165,6 @@ public class Gameface extends JFrame {
 
         });
 
-
-
     }
 
     public void removeOldSelectedButton(){

@@ -184,7 +184,11 @@ public class LoginFrame extends JPanel {
             this.limit = limit;
         }
 
+<<<<<<< Updated upstream
         public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+=======
+        public void insertString( int offset, String str, AttributeSet attr) throws BadLocationException {
+>>>>>>> Stashed changes
             if (str == null) return;
 
             if ((getLength() + str.length()) <= limit) {
@@ -193,7 +197,18 @@ public class LoginFrame extends JPanel {
         }
     }
 
+<<<<<<< Updated upstream
     //TEST
+=======
+    // TEST
+    
+            public void proceedLogin() throws IOException {
+
+                if (correctName && correctImage == true) {
+                    loginFrame.setVisible(false);
+
+                    User user = new User(loginTf.getText(), userPicture);
+>>>>>>> Stashed changes
 
     public void proceedLogin() throws IOException {
 
