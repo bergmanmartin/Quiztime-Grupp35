@@ -5,6 +5,8 @@ import Controller.Server;
 import Model.Users.User;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +22,7 @@ public class MainSecondFrame {
     private User user;
 
     private JFrame frame;
+
     private JPanel topleftPanel;
     private JPanel toprightPanel;
     private JPanel bottomLeftPanel;
@@ -27,6 +30,7 @@ public class MainSecondFrame {
 
     private JButton startButton;
     private JButton quitButton;
+
     private JRadioButton playAloneButton;
     private JRadioButton playWithFriendsButton;
 
@@ -43,8 +47,9 @@ public class MainSecondFrame {
         //Fill JFrame
         topLeft();
         topRight();
-        bottomRight();
         bottomLeft();
+        bottomRight();
+
         frame.setVisible(true);
         frame.setResizable(false);            // Prevent user from change size
         frame.setLocationRelativeTo(null);    // Start middle screen
@@ -60,7 +65,9 @@ public class MainSecondFrame {
         JLabel imageLBL = new JLabel();
 
         topleftPanel.setLayout(new GridBagLayout());
+        topleftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
+        //username.setSize(100,75);
         username.setText(user.getUsername());
         imageLBL.setIcon(user.getUserPicture());
         imagePanel.add(imageLBL);
@@ -71,31 +78,66 @@ public class MainSecondFrame {
         frame.add(topleftPanel);
     }
 
-    public void topRight(){
+    public void topRight() {
         toprightPanel = new JPanel();
+
+
+        toprightPanel.setBorder(BorderFactory.createTitledBorder(" Contact Register "));
+
+        toprightPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+
+        JList list = new JList();
+
+        Font font = new Font("Courier New", Font.PLAIN, 10);
+        list.setFont(font);
+
+        list.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        list.setPreferredSize(new Dimension(300, 200));
+
+        //addListner();
+        toprightPanel.add(list);
 
         frame.add(toprightPanel);
     }
 
-    public void bottomLeft(){
+    public void bottomLeft() {
+
         bottomLeftPanel = new JPanel();
+        bottomLeftPanel.setLayout(new GridLayout(2,2));
+        bottomLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        //RadioButtons + button group
         playAloneButton = new JRadioButton("Play Alone");
+        playAloneButton.setPreferredSize(new Dimension(200, 60));
+        bottomLeftPanel.add(playAloneButton);
+
         playWithFriendsButton = new JRadioButton("Play With Friends");
-        startButton = new JButton("Start Game");
+        playWithFriendsButton.setPreferredSize(new Dimension(200, 60));
+        bottomLeftPanel.add(playWithFriendsButton);
+
         ButtonGroup btngroup = new ButtonGroup();
+
+        //Start and quit buttons
+        startButton = new JButton("Start Game");
+        startButton.setPreferredSize(new Dimension(200, 60));
+        startButton.setForeground(Color.GREEN);
+        bottomLeftPanel.add(startButton);
+
+        quitButton = new JButton("Quit");
+        quitButton.setPreferredSize(new Dimension(200, 60));
+        quitButton.setForeground(Color.RED);
+        bottomLeftPanel.add(quitButton);
+
         btngroup.add(playAloneButton);
         btngroup.add(playWithFriendsButton);
 
-        playAloneButton.setPreferredSize(new Dimension(200,60));
-        playWithFriendsButton.setPreferredSize(new Dimension(200,60));
-        startButton.setPreferredSize(new Dimension(200,60));
-
         startButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Hämtar vilken knapp som är itryckt och sen utför.
 
-                if(playAloneButton.isSelected()){
+                //Hämtar vilken knapp som är itryckt och sen utför.
+                if(playAloneButton.isSelected()) {
                     frame.setVisible(false);
                     try {
                         Server server = new Server(2343);
@@ -103,15 +145,17 @@ public class MainSecondFrame {
                         ex.printStackTrace();
                     }
                     Client Client = new Client("127.0.0.1", 2343);
+                } else if (playWithFriendsButton.isSelected()) {
+                    //kod som kopplar ihop spelaren ed motståndare.
                 }
             }
         });
 
         frame.add(bottomLeftPanel);
-
     }
 
-    public void bottomRight(){
+    public void bottomRight() {
+
         bottomRightPanel = new JPanel();
 
         frame.add(bottomRightPanel);
