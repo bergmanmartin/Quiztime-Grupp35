@@ -1,14 +1,8 @@
 package VIew.LoginGui;
 
-import Controller.Client;
-import Controller.Server;
 import Model.Users.User;
 import SecondFrame.MainSecondFrame;
-import StartPageGUI.MainFrame;
-
-
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -16,8 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 
 /**
  * Class of the Loginframe with gui and functionality.
