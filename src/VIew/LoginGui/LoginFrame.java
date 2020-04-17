@@ -63,14 +63,10 @@ public class LoginFrame extends JPanel {
         settingImagePanel();
         settingSignInPanel();
         settingButtonPanel();
-
         setPreferredSize(new Dimension(600, 400));
         initWinow();
-
-
         buttonActions();
     }
-
 
 
 
