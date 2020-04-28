@@ -10,19 +10,23 @@ import java.io.Serializable;
 public class Questions implements Serializable {
 
     private String question;
+
     private String alternative1;
     private String alternative2;
     private String alternative3;
     private String alternative4;
+
     private String correctAlternative;
 
-    public Questions(String question, String alternative1, String alternative2, String alternative3, String alternative4, String correctAlternative){
+    public Questions(String question, String alternative1, String alternative2, String alternative3, String alternative4, String correctAlternative) {
 
         this.question = question;
+
         this.alternative1 = alternative1;
         this.alternative2 = alternative2;
         this.alternative3 = alternative3;
         this.alternative4 = alternative4;
+
         this.correctAlternative = correctAlternative;
     }
 
@@ -46,7 +50,5 @@ public class Questions implements Serializable {
         return alternative4;
     }
 
-    public String getCorrectAlternative() {
-        return correctAlternative;
-    }
+    public String getCorrectAlternative() { return correctAlternative; }
 }

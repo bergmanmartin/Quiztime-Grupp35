@@ -18,21 +18,21 @@ public class Gameface extends JFrame {
     //JLabels
     private JLabel question = new JLabel();
     //JButtons
-    private JToggleButton firstAlternative = new JToggleButton();
+    /*private JToggleButton firstAlternative = new JToggleButton();
     private JToggleButton secondAlternative = new JToggleButton();
     private JToggleButton thirdAlternative = new JToggleButton();
     private JToggleButton forthAlternative = new JToggleButton();
 
-    private JToggleButton selectedButton = new JToggleButton();
+    private JToggleButton selectedButton = new JToggleButton();*/
 
     private ButtonGroup buttonGroup = new ButtonGroup();
 
-    /*private JButton firstAlternative = new JButton();
+    private JButton firstAlternative = new JButton();
     private JButton secondAlternative = new JButton();
     private JButton thirdAlternative = new JButton();
     private JButton forthAlternative = new JButton();
 
-    private JButton selectedButton = new JButton();*/
+    private JButton selectedButton = new JButton();
 
     //JProgressbar
     private JProgressBar jProgressBar = new JProgressBar();
@@ -50,6 +50,11 @@ public class Gameface extends JFrame {
         setCenterPanel();
         setSouthPanel();
         setActionListeners();
+
+        firstAlternative.setFocusable(false);
+        secondAlternative.setFocusable(false);
+        thirdAlternative.setFocusable(false);
+        forthAlternative.setFocusable(false);
 
         buttonGroup.add(firstAlternative);
         buttonGroup.add(secondAlternative);
@@ -78,14 +83,17 @@ public class Gameface extends JFrame {
     public void setSouthPanel() {
         southPanel.setSize(new Dimension(400, 200));
         southPanel.setLayout(new GridLayout(2,2));
+
         firstAlternative.setPreferredSize(new Dimension(150, 100));
         secondAlternative.setPreferredSize(new Dimension(150, 100));
         thirdAlternative.setPreferredSize(new Dimension(150, 100));
         forthAlternative.setPreferredSize(new Dimension(150, 100));
+
         southPanel.add(firstAlternative);
         southPanel.add(secondAlternative);
         southPanel.add(thirdAlternative);
         southPanel.add(forthAlternative);
+
         add(southPanel, BorderLayout.SOUTH);
 
     }
@@ -106,16 +114,13 @@ public class Gameface extends JFrame {
                 } catch (Exception e) {
             }
 
-
-
         }
-
-
 
     }
 
     public void setQuestion(String question1, String alternative1, String alternative2, String alternative3, String alternative4){
         question.setText(question1);
+
         firstAlternative.setText(alternative1);
         secondAlternative.setText(alternative2);
         thirdAlternative.setText(alternative3);
@@ -210,6 +215,7 @@ public class Gameface extends JFrame {
     }*/
 
     public void resetButtons() {
+
         firstAlternative.setSelected(false);
         secondAlternative.setSelected(false);
         thirdAlternative.setSelected(false);

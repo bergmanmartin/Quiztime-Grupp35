@@ -60,6 +60,7 @@ public class Client {
 
 
                 while (true) {
+                    //Eventuellt en if-sats här?
                     newQuestions(counterOfQuestion);
 
                     sleep(10000);
@@ -67,7 +68,6 @@ public class Client {
                     getAlternative(counterOfQuestion);
 
                     //gameface.getSelectedKnapp().setSelected(false);
-
 
                     counterOfQuestion += 1;
 
