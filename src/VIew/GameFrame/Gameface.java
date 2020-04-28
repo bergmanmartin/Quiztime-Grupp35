@@ -18,12 +18,21 @@ public class Gameface extends JFrame {
     //JLabels
     private JLabel question = new JLabel();
     //JButtons
-    private JButton firstAlternative = new JButton();
+    private JToggleButton firstAlternative = new JToggleButton();
+    private JToggleButton secondAlternative = new JToggleButton();
+    private JToggleButton thirdAlternative = new JToggleButton();
+    private JToggleButton forthAlternative = new JToggleButton();
+
+    private JToggleButton selectedButton = new JToggleButton();
+
+    private ButtonGroup buttonGroup = new ButtonGroup();
+
+    /*private JButton firstAlternative = new JButton();
     private JButton secondAlternative = new JButton();
     private JButton thirdAlternative = new JButton();
     private JButton forthAlternative = new JButton();
 
-    private JButton selectedButton = new JButton();
+    private JButton selectedButton = new JButton();*/
 
     //JProgressbar
     private JProgressBar jProgressBar = new JProgressBar();
@@ -41,6 +50,11 @@ public class Gameface extends JFrame {
         setCenterPanel();
         setSouthPanel();
         setActionListeners();
+
+        buttonGroup.add(firstAlternative);
+        buttonGroup.add(secondAlternative);
+        buttonGroup.add(thirdAlternative);
+        buttonGroup.add(forthAlternative);
 
     }
 
@@ -108,7 +122,8 @@ public class Gameface extends JFrame {
         forthAlternative.setText(alternative4);
 
         if (selectedButton != null){
-            removeOldSelectedButton();
+            //removeOldSelectedButton();
+            resetButtons();
         }
 
         FillThread fillThread = new FillThread();
@@ -124,7 +139,8 @@ public class Gameface extends JFrame {
                     removeOldSelectedButton();
                 }
                 selectedButton = firstAlternative;
-                setSelectedButton(selectedButton);
+                //setSelectedButton(selectedButton);
+                firstAlternative.setSelected(true);
             }
 
         });
@@ -136,7 +152,8 @@ public class Gameface extends JFrame {
                     removeOldSelectedButton();
                 }
                 selectedButton = secondAlternative;
-                setSelectedButton(selectedButton);
+               // setSelectedButton(selectedButton);
+                secondAlternative.setSelected(true);
             }
 
         });
@@ -148,7 +165,8 @@ public class Gameface extends JFrame {
                     removeOldSelectedButton();
                 }
                 selectedButton = thirdAlternative;
-                setSelectedButton(selectedButton);
+                //setSelectedButton(selectedButton);
+                thirdAlternative.setSelected(true);
             }
 
         });
@@ -157,13 +175,16 @@ public class Gameface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (selectedButton != null){
-                    removeOldSelectedButton();
+                  removeOldSelectedButton();
                 }
                 selectedButton = forthAlternative;
-                setSelectedButton(selectedButton);
+                //etSelectedButton(selectedButton);
+                forthAlternative.setSelected(true);
             }
 
         });
+
+
 
 
 
@@ -172,17 +193,28 @@ public class Gameface extends JFrame {
     public void removeOldSelectedButton(){
 
         selectedButton.setBackground(null);
-
+        selectedButton.setSelected(false);
     }
 
     public void setSelectedButton(JButton selectedButton){
 
-        selectedButton.setBackground(Color.GREEN);
+        selectedButton.setBackground(Color.green);
     }
 
     public String getSelectedButton(){
         return selectedButton.getText();
     }
 
+    /*public JButton getSelectedKnapp() {
+        return selectedButton;
+    }*/
+
+    public void resetButtons() {
+        firstAlternative.setSelected(false);
+        secondAlternative.setSelected(false);
+        thirdAlternative.setSelected(false);
+        forthAlternative.setSelected(false);
+
+    }
 }
 

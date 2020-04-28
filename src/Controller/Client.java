@@ -42,7 +42,8 @@ public class Client {
 
     private class ClientGo extends Thread{
 
-        private int counter = 0;
+        //Tar nästa fråga
+        private int counterOfQuestion = 0;
 
         public void run(){
 
@@ -50,20 +51,25 @@ public class Client {
 
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
+
                 for (int i = 0; i < 10; i++) {
 
                     questions[i] = (Questions) inputStream.readObject();
+                    gameface.resetButtons();
                 }
 
 
                 while (true) {
-                    newQuestions(counter);
+                    newQuestions(counterOfQuestion);
 
                     sleep(10000);
 
-                    getAlternative(counter);
+                    getAlternative(counterOfQuestion);
 
-                    counter += 1;
+                    //gameface.getSelectedKnapp().setSelected(false);
+
+
+                    counterOfQuestion += 1;
 
                     System.out.println(numOfPoints);
                 }
