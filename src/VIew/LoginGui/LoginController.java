@@ -1,9 +1,6 @@
 package VIew.LoginGui;
 
 import Model.Users.User;
-import StartPageGUI.LayoutExample;
-
-
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -14,7 +11,7 @@ public class LoginController {
     private ArrayList<User> userlist = new ArrayList<User>();
     private String file;
     private String filePath;
-    private LayoutExample startPage;
+
 
 
 
