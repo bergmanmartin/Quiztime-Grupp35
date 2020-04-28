@@ -1,12 +1,10 @@
-package SecondFrame;
+package VIew.SecondFrame;
 
 import Controller.Client;
 import Controller.Server;
 import Model.Users.User;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

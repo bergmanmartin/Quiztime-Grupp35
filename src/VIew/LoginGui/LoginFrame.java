@@ -1,7 +1,7 @@
 package VIew.LoginGui;
 
 import Model.Users.User;
-import SecondFrame.MainSecondFrame;
+import VIew.SecondFrame.MainSecondFrame;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
