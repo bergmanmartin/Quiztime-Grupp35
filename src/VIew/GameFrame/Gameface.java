@@ -23,7 +23,7 @@ public class Gameface extends JFrame {
     private JButton thirdAlternative = new JButton();
     private JButton forthAlternative = new JButton();
 
-    private JButton selectedButton;
+    private JButton selectedButton = new JButton();
 
     //JProgressbar
     private JProgressBar jProgressBar = new JProgressBar();
@@ -178,7 +178,6 @@ public class Gameface extends JFrame {
     public void setSelectedButton(JButton selectedButton){
 
         selectedButton.setBackground(Color.GREEN);
-
     }
 
     public String getSelectedButton(){

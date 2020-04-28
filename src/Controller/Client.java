@@ -56,8 +56,7 @@ public class Client {
                 }
 
 
-                while(true) {
-
+                while (true) {
                     newQuestions(counter);
 
                     sleep(10000);
@@ -67,9 +66,7 @@ public class Client {
                     counter += 1;
 
                     System.out.println(numOfPoints);
-
                 }
-
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
