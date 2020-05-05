@@ -9,11 +9,13 @@ import java.net.UnknownHostException;
 
 /**
  * @Created 11/02/2020
- * @project P1
+ * @project QuizTime
  * @Markus Gerdtsson
  */
+
+
 public class Client {
-    // Martin
+
     private String ip;
     private int port;
     private Socket socket;
@@ -40,53 +42,66 @@ public class Client {
 
     }
 
+    /**
+     * Inner class that run the thread
+     */
     private class ClientGo extends Thread{
 
-        //Tar nästa fråga
+        //Keeping track of number of questions shown
         private int counterOfQuestion = 0;
 
         public void run(){
 
-            try {
+                    try {
 
-                ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-
-
-                for (int i = 0; i < 10; i++) {
-
-                    questions[i] = (Questions) inputStream.readObject();
-                    gameface.resetButtons();
-                }
+                        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
 
-                while (true) {
-                    //Eventuellt en if-sats här?
-                    newQuestions(counterOfQuestion);
+                        for (int i = 0; i < 10; i++) {
 
-                    sleep(10000);
+                            questions[i] = (Questions) inputStream.readObject();
+                            gameface.resetButtons();
+                        }
 
-                    getAlternative(counterOfQuestion);
 
-                    //gameface.getSelectedKnapp().setSelected(false);
+                        while (true) {
+                            //Eventuellt en if-sats här?
+                            newQuestions(counterOfQuestion);
 
-                    counterOfQuestion += 1;
+                            sleep(10000);
 
-                    System.out.println(numOfPoints);
-                }
+                            getAlternative(counterOfQuestion);
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                            //gameface.getSelectedKnapp().setSelected(false);
+
+                            counterOfQuestion += 1;
+
+                            System.out.println(numOfPoints);
+                        }
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
             }
         }
+
+        /**
+         * Displaying the new question
+         * @param counter
+         */
 
         public void newQuestions(int counter){
 
             gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
         }
+
+        /**
+         * Collecting the alternative the player chooses
+         * @param counter
+         */
 
         public void getAlternative(int counter){
 

@@ -11,8 +11,8 @@ import java.net.Socket;
  * @project P1
  * @Markus Gerdtsson
  */
-public class Server {
 
+public class Server {
 
     private Questionreader qr;
 
@@ -25,12 +25,12 @@ public class Server {
 
         gameQuestions = qr.getQuestions();
 
-
-
         new Connection(port).start();
     }
 
-
+    /**
+     * Inner class that connect the client to the server
+     */
 
     private class Connection extends Thread{
         private int port;
@@ -62,13 +62,14 @@ public class Server {
         }
     }
 
+    /**
+     * Inner class that run the thread during the game
+     */
 
     private class clientHandler extends Thread {
 
         private Socket socket;
         private DataOutputStream dos;
-
-        private int index = 0;
 
 
         public clientHandler(Socket socket) {
@@ -106,6 +107,9 @@ public class Server {
         }
     }
 
+    /**
+     * Sends the questions on demand
+     */
 
         /*public void sendQuestions(){
             try {

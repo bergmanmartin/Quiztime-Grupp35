@@ -9,12 +9,17 @@ import java.io.IOException;
 
 /**
  * @Created 11/02/2020
- * @project P1
+ * @project QuizTime
  * @Markus Gerdtsson
  */
+
 public class Questionreader {
 
     private Questions[] questions;
+
+    /**
+     * Creating a Question-object and reads the following lines.
+     */
 
     public Questionreader(){
 
@@ -41,6 +46,11 @@ public class Questionreader {
         }
 
     }
+
+    /**
+     * Returning the list with the question-objects
+     * @return
+     */
 
     public Questions[] getQuestions() {
         return questions;

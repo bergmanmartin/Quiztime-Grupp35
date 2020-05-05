@@ -12,35 +12,14 @@ public class LoginController {
     private String file;
     private String filePath;
 
-
-
-
-
     public LoginController (){
         loginFrame = new LoginFrame(this);
 
-
-
     }
-
 
     public boolean checkUsername(String name){
         boolean match = name.matches("[a-zA-Z0-9]+");
         return match;
-    }
-
-
-
-    public void emptyUsername() {
-        if (loginFrame.getUsernname().equals("")) {
-            JOptionPane.showMessageDialog(null, "Invalid username");
-        }
-    }
-
-    public void invalidCharacters() {
-        String username = loginFrame.getUsernname();
-        for (int i = 0; i < username.length(); i++) {
-        }
     }
 
 /*
@@ -51,7 +30,6 @@ public class LoginController {
         return user;
     }
 */
-
 
     public String selectedImage() {
         JFileChooser imageChooser = new JFileChooser();
