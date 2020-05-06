@@ -1,9 +1,12 @@
-package Controller;
+package Client.Controller;
 
-import Model.QuestionModel.Questions;
-import VIew.GameFrame.Gameface;
 
-import java.io.*;
+
+import Client.Model.Questions;
+import Client.View.Gameface;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -39,6 +42,7 @@ public class Client {
         }
 
     }
+    //BRB toa!!!
 
     private class ClientGo extends Thread{
 

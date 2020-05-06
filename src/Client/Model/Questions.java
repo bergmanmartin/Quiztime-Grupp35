@@ -1,4 +1,4 @@
-package Model.QuestionModel;
+package Client.Model;
 
 import java.io.Serializable;
 

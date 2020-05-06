@@ -1,6 +1,6 @@
-package Controller;
+package Server;
 
-import Model.QuestionModel.Questions;
+
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,11 +12,11 @@ import java.io.IOException;
  * @project P1
  * @Markus Gerdtsson
  */
-public class Questionreader {
+public class QuestionReader {
 
     private Questions[] questions;
 
-    public Questionreader(){
+    public QuestionReader(){
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("files/Questions"));
@@ -34,7 +34,7 @@ public class Questionreader {
             }
 
 
-    } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

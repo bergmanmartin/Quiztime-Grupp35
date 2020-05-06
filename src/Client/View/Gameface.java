@@ -1,4 +1,4 @@
-package VIew.GameFrame;
+package Client.View;
 
 /**
  * @Created 11/02/2020

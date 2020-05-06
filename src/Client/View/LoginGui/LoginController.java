@@ -1,12 +1,13 @@
-package VIew.LoginGui;
+package Client.View.LoginGui;
 
-import Model.Users.User;
-import StartPageGUI.LayoutExample;
 
+
+import Client.Model.User;
 
 import javax.swing.*;
-import java.io.File;
 import java.util.ArrayList;
+
+//import StartPageGUI.LayoutExample;
 
 public class LoginController {
     private LoginFrame loginFrame;
@@ -14,7 +15,7 @@ public class LoginController {
     private ArrayList<User> userlist = new ArrayList<User>();
     private String file;
     private String filePath;
-    private LayoutExample startPage;
+  //  private LayoutExample startPage;
 
 
 

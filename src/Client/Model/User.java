@@ -1,7 +1,6 @@
-package Model.Users;
+package Client.Model;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * @Created 11/02/2020

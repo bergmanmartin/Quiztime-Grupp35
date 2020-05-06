@@ -1,7 +1,9 @@
-package VIew.LoginGui;
+package Client.View.LoginGui;
 
-import Model.Users.User;
-import VIew.SecondFrame.MainSecondFrame;
+
+import Client.Model.User;
+import Client.View.MainSecondFrame;
+
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -44,7 +46,6 @@ public class LoginFrame extends JPanel {
 
 
     private JFrame loginFrame;
-
 
     private LoginController controller;
 

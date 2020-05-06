@@ -1,6 +1,6 @@
-package Controller;
+package Server;
 
-import Model.QuestionModel.Questions;
+
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -14,14 +14,14 @@ import java.net.Socket;
 public class Server {
 
 
-    private Questionreader qr;
+    private QuestionReader qr;
 
     private Questions[] gameQuestions;
 
 
     public Server(int port) throws IOException {
 
-        qr = new Questionreader();
+        qr = new QuestionReader();
 
         gameQuestions = qr.getQuestions();
 
@@ -129,7 +129,4 @@ public class Server {
         }
 
          */
-    }
-
-
-
+}

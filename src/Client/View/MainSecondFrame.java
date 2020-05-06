@@ -1,14 +1,14 @@
-package VIew.SecondFrame;
+package Client.View;
 
-import Controller.Client;
-import Controller.Server;
-import Model.Users.User;
+
+
+import Client.Controller.Client;
+import Client.Model.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /**
  * @Created 11/02/2020
@@ -137,11 +137,7 @@ public class MainSecondFrame {
                 //Hämtar vilken knapp som är itryckt och sen utför.
                 if(playAloneButton.isSelected()) {
                     frame.setVisible(false);
-                    try {
-                        Server server = new Server(2343);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+
                     Client Client = new Client("127.0.0.1", 2343);
                 } else if (playWithFriendsButton.isSelected()) {
                     //kod som kopplar ihop spelaren ed motståndare.
