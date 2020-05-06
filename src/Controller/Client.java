@@ -8,12 +8,14 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * Class that represents the client part of the server-client architecture. Considered the controller class for the game.
+ * Has contact with the server and gathers information from the player and the server.
+ * @author Markus Gerdtsson
+ * @author Erik Nielse
+ * @version 1.0
  */
 public class Client {
-    // Martin
+
     private String ip;
     private int port;
     private Socket socket;
@@ -21,6 +23,11 @@ public class Client {
     private Questions[] questions = new Questions[10];
     private int numOfPoints = 0;
 
+    /**
+     * Initializes the gameface and sets up the client with the server connection.
+     * @param ip
+     * @param port
+     */
     public Client(String ip, int port){
 
         this.gameface = new Gameface();
@@ -40,6 +47,10 @@ public class Client {
 
     }
 
+    /**
+     * Runs the client and retrieves information form the server. Reads the question objects. After 10 seconds a new
+     * question is read.
+     */
     private class ClientGo extends Thread{
 
         //Tar nästa fråga
@@ -83,11 +94,19 @@ public class Client {
             }
         }
 
+        /**
+         * Shwos a new question.
+         * @param counter
+         */
         public void newQuestions(int counter){
 
             gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
         }
 
+        /**
+         * Checks the alternative and checks if the answer is correct and then adds a point if the condicition is fullfilled.
+         * @param counter questions counter
+         */
         public void getAlternative(int counter){
 
             System.out.println(gameface.getSelectedButton());

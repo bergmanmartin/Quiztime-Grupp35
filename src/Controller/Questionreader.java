@@ -8,14 +8,18 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * Class that reads the lines from the file. The file is structured in a way so the first read line is the question every iteration.
+ * and then four lines are the question and then the line after that is the line that shows which answer is correct
+ * @author Markus Gerdtsson
+ * @author Erik Nielsen
  */
 public class Questionreader {
 
     private Questions[] questions;
 
+    /**
+     * Initializes the reader and then reads questions from the file and store them in the array.
+     */
     public Questionreader(){
 
         try {

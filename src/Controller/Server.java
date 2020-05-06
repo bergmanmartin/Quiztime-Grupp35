@@ -7,9 +7,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * Sets up the server connection and reads the question from the reader.
+ * @author Markus Gerdtsson
+ * @author Erik Nielsen
+ * @version 1.0
  */
 public class Server {
 
@@ -18,7 +19,11 @@ public class Server {
 
     private Questions[] gameQuestions;
 
-
+    /**
+     * Initializes the reader and the questions calsses and sets up the Connection
+     * @param port
+     * @throws IOException
+     */
     public Server(int port) throws IOException {
 
         qr = new Questionreader();
@@ -31,7 +36,11 @@ public class Server {
     }
 
 
-
+    /**
+     * Sets up the server connection
+     * @author Martin Bergman
+     * @author Erik Nielsen
+     */
     private class Connection extends Thread{
         private int port;
 
@@ -62,7 +71,9 @@ public class Server {
         }
     }
 
-
+    /**
+     * Sets up the clienthandler that reads  from the outputStream.
+     */
     private class clientHandler extends Thread {
 
         private Socket socket;

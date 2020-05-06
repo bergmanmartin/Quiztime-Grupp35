@@ -5,9 +5,9 @@ import VIew.LoginGui.LoginController;
 import java.io.IOException;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * Class that starts the program
+ * @author Martkus Gerdtsson
+ * @author Erik Nielsen
  */
 public class Main {
 
