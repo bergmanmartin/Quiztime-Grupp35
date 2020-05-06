@@ -138,10 +138,13 @@ public class MainSecondFrame {
                 if(playAloneButton.isSelected()) {
                     frame.setVisible(false);
 
-                    Client Client = new Client("127.0.0.1", 2343, user);
-                    Client Client2 = new Client("127.0.0.1", 2343, user);
+                    Client client = new Client("127.0.0.1", 3000, user);
+
                 } else if (playWithFriendsButton.isSelected()) {
-                    //kod som kopplar ihop spelaren med motståndare.
+                    frame.setVisible(false);
+                    Client client = new Client("127.0.0.1", 3000, user);
+                    Client clients = new Client("127.0.0.1", 3000, user);
+                    new PlayWithFriendsFrame(user, client);
                 }
             }
         });

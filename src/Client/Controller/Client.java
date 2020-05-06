@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.LinkedList;
 
 /**
  * @Created 11/02/2020
@@ -27,6 +28,9 @@ public class Client {
     private int numOfPoints = 0;
     private User user;
 
+    private ObjectOutputStream oos;
+    private ObjectInputStream ois;
+
     public Client(String ip, int port, User user){
 
         this.gameface = new Gameface();
@@ -37,7 +41,9 @@ public class Client {
         try {
             socket = new Socket(ip,port);
 
-            new ClientGo().start();
+            new ClientConnecter().start();
+
+            //new ClientGo().start();
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -47,12 +53,51 @@ public class Client {
 
     }
 
+    private class ClientConnecter extends Thread{
+
+        private LinkedList<User> userList;
+
+        public ClientConnecter() throws IOException {
+
+            oos = new ObjectOutputStream(socket.getOutputStream());
+            ois = new ObjectInputStream(socket.getInputStream());
+
+
+
+        }
+        public void run(){
+
+            try {
+                oos.writeObject(user);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            while(true){
+                try {
+
+                    User a = (User) ois.readObject();
+
+
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
+    }
+
 
     private class ClientGo extends Thread{
 
         private int counter = 0;
 
-        private ObjectOutputStream oos;
 
         public void run(){
 
@@ -60,7 +105,7 @@ public class Client {
 
                 oos = new ObjectOutputStream(socket.getOutputStream());
 
-                oos.writeObject(user);
+
 
                 } catch (IOException ex) {
                 ex.printStackTrace();
@@ -71,9 +116,13 @@ public class Client {
 
                     newQuestions(counter);
 
+                try {
                     sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                    getAlternative(counter);
+                getAlternative(counter);
 
                     counter += 1;
 
@@ -81,14 +130,6 @@ public class Client {
 
                 }
 
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
         }
 
         public void newQuestions(int counter){

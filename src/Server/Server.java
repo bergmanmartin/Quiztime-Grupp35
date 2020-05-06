@@ -21,6 +21,8 @@ public class Server {
 
     private LinkedList<User> userList;
 
+    private LinkedList<Socket> socketList;
+
     private LinkedList<ObjectOutputStream> objectStreamsList;
 
 
@@ -31,6 +33,8 @@ public class Server {
         gameQuestions = qr.getQuestions();
 
         userList = new LinkedList<>();
+
+        socketList = new LinkedList<>();
 
         objectStreamsList = new LinkedList<>();
 
@@ -59,7 +63,7 @@ public class Server {
                     try{
                         socket = serverSocket.accept();
 
-                        new clienList(socket);
+                        new clientList(socket);
 
                         //new clientHandler(socket);
 
@@ -75,13 +79,13 @@ public class Server {
         }
     }
 
-    private class clienList extends Thread {
+    private class clientList extends Thread {
 
         private Socket socket;
         private ObjectInputStream ois;
         private ObjectOutputStream oos;
 
-        public clienList(Socket socket){
+        public clientList(Socket socket){
             this.socket = socket;
             System.out.println("Startar en socket");
         }
@@ -97,9 +101,12 @@ public class Server {
 
                 userList.add(user);
 
-                for (User user1 : userList) {
-                    oos.writeObject(user1);
+                for (Socket socket1 : socketList) {
+                    for (User user1 : userList) {
+                        oos.writeObject(user1.getUsername());
+                    }
                 }
+
 
 
 

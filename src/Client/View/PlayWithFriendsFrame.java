@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.Semaphore;
 
 /**
  * @Created 11/02/2020
@@ -40,10 +42,12 @@ public class PlayWithFriendsFrame {
 
     private Thread thread;
 
-    private ArrayList<User> users;
+    private DefaultListModel<String> listModel;
+
+    private String[] s = new String[]{"hej", "JAg"};
 
 
-    public PlayWithFriendsFrame(Client client, User user){
+    public PlayWithFriendsFrame(User user, Client client){
 
         this.user = user;
         this.client = client;
@@ -96,7 +100,11 @@ public class PlayWithFriendsFrame {
 
         toprightPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 
-        list = new JList((ListModel) users);
+        listModel = new DefaultListModel<>();
+
+        listModel.addElement("MARKus");
+
+        list = new JList(listModel);
 
         Font font = new Font("Courier New", Font.PLAIN, 10);
         list.setFont(font);
@@ -142,27 +150,6 @@ public class PlayWithFriendsFrame {
         btngroup.add(playAloneButton);
         btngroup.add(playWithFriendsButton);
 
-        startButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                //Hämtar vilken knapp som är itryckt och sen utför.
-                if(playAloneButton.isSelected()) {
-                    frame.setVisible(false);
-                    //try {
-                      //  Server server = new Server(2343);
-                   // } catch (IOException ex) {
-                     //   ex.printStackTrace();
-                   // }
-
-
-                    Client Client = new Client("127.0.0.1", 2343);
-                } else if (playWithFriendsButton.isSelected()) {
-                    //kod som kopplar ihop spelaren ed motståndare.
-                }
-            }
-        });
 
         frame.add(bottomLeftPanel);
     }
@@ -174,9 +161,17 @@ public class PlayWithFriendsFrame {
         frame.add(bottomRightPanel);
     }
 
-    public void updateList(){
+    public void addUser(LinkedList<User> name) {
+
+        listModel = new DefaultListModel<>();
+
+        for (User user1 : name) {
+            listModel.addElement(user1.getUsername());
+        }
+
 
 
     }
+
 
 }
