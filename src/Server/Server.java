@@ -5,6 +5,7 @@ package Server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
 
 /**
  * @Created 11/02/2020
@@ -18,12 +19,20 @@ public class Server {
 
     private Questions[] gameQuestions;
 
+    private LinkedList<User> userList;
+
+    private LinkedList<ObjectOutputStream> objectStreamsList;
+
 
     public Server(int port) throws IOException {
 
         qr = new QuestionReader();
 
         gameQuestions = qr.getQuestions();
+
+        userList = new LinkedList<>();
+
+        objectStreamsList = new LinkedList<>();
 
 
 
@@ -49,7 +58,11 @@ public class Server {
                 while (true){
                     try{
                         socket = serverSocket.accept();
-                        new clientHandler(socket);
+
+                        new clienList(socket);
+
+                        //new clientHandler(socket);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -61,6 +74,44 @@ public class Server {
             }
         }
     }
+
+    private class clienList extends Thread {
+
+        private Socket socket;
+        private ObjectInputStream ois;
+        private ObjectOutputStream oos;
+
+        public clienList(Socket socket){
+            this.socket = socket;
+            System.out.println("Startar en socket");
+        }
+
+        public void run(){
+
+            try {
+
+                ois = new ObjectInputStream(socket.getInputStream());
+                oos = new ObjectOutputStream(socket.getOutputStream());
+
+                User user = (User) ois.readObject();
+
+                userList.add(user);
+
+                for (User user1 : userList) {
+                    oos.writeObject(user1);
+                }
+
+
+
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
 
 
     private class clientHandler extends Thread {
@@ -75,6 +126,7 @@ public class Server {
 
 
             this.socket = socket;
+
 
             start();
 

@@ -3,10 +3,12 @@ package Client.Controller;
 
 
 import Client.Model.Questions;
+import Client.Model.User;
 import Client.View.Gameface;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -23,12 +25,14 @@ public class Client {
     private Gameface gameface;
     private Questions[] questions = new Questions[10];
     private int numOfPoints = 0;
+    private User user;
 
-    public Client(String ip, int port){
+    public Client(String ip, int port, User user){
 
         this.gameface = new Gameface();
         this.ip = ip;
         this.port = port;
+        this.user = user;
 
         try {
             socket = new Socket(ip,port);
@@ -42,25 +46,28 @@ public class Client {
         }
 
     }
-    //BRB toa!!!
+
 
     private class ClientGo extends Thread{
 
         private int counter = 0;
 
+        private ObjectOutputStream oos;
+
         public void run(){
 
             try {
 
-                ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+                oos = new ObjectOutputStream(socket.getOutputStream());
 
-                for (int i = 0; i < 10; i++) {
+                oos.writeObject(user);
 
-                    questions[i] = (Questions) inputStream.readObject();
-                }
+                } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
 
-                while(true) {
+            while(true) {
 
                     newQuestions(counter);
 
