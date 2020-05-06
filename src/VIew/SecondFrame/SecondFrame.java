@@ -15,7 +15,7 @@ import java.io.IOException;
  * @project P1
  * @Markus Gerdtsson
  */
-public class MainSecondFrame {
+public class SecondFrame {
 
     private User user;
 
@@ -33,7 +33,7 @@ public class MainSecondFrame {
     private JRadioButton playWithFriendsButton;
 
 
-    public MainSecondFrame(User user){
+    public SecondFrame(User user){
 
         this.user = user;
 
@@ -65,7 +65,6 @@ public class MainSecondFrame {
         topleftPanel.setLayout(new GridBagLayout());
         topleftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        //username.setSize(100,75);
         username.setText(user.getUsername());
         imageLBL.setIcon(user.getUserPicture());
         imagePanel.add(imageLBL);
@@ -92,7 +91,6 @@ public class MainSecondFrame {
         list.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         list.setPreferredSize(new Dimension(300, 200));
 
-        //addListner();
         toprightPanel.add(list);
 
         frame.add(toprightPanel);

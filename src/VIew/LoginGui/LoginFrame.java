@@ -1,7 +1,7 @@
 package VIew.LoginGui;
 
 import Model.Users.User;
-import VIew.SecondFrame.MainSecondFrame;
+import VIew.SecondFrame.SecondFrame;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -26,8 +26,6 @@ public class LoginFrame extends JPanel {
     private JButton loginBtn = new JButton("Login");
     private JButton imageBtn = new JButton("Select image");
 
-    private ImageIcon image;
-
     private JTextField loginTf = new JTextField();
 
     private JPanel pnlImage = new JPanel();
@@ -35,19 +33,14 @@ public class LoginFrame extends JPanel {
     private JPanel pnlLoginTf = new JPanel();
     private JPanel pnlLoginBtn = new JPanel();
 
-
     private JLabel imageLbl = new JLabel();
 
     private boolean correctImage = false;
     private boolean correctName = false;
 
-
-
     private JFrame loginFrame;
 
-
     private LoginController controller;
-
 
     public LoginFrame(LoginController controller) {
 
@@ -192,8 +185,6 @@ public class LoginFrame extends JPanel {
             }
         }
     }
-
-    //TEST
     
             public void proceedLogin() throws IOException {
 
@@ -202,7 +193,7 @@ public class LoginFrame extends JPanel {
 
                     User user = new User(loginTf.getText(), userPicture);
 
-                    MainSecondFrame mains = new MainSecondFrame(user);
+                    SecondFrame mains = new SecondFrame(user);
                 }
             }
 
