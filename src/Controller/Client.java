@@ -37,7 +37,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private class ClientGo extends Thread{
