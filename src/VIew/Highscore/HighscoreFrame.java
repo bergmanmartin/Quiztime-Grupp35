@@ -2,6 +2,7 @@ package VIew.Highscore;
 
 import Model.Users.User;
 
+import javax.sql.rowset.serial.SerialJavaObject;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -23,6 +24,9 @@ public class HighscoreFrame {
 
     private int numberOfPoints;
     private ImageIcon userPicture;
+    private String[] correctAlternatives;
+    private String[] questionList = new String[]{"Question 1", "Question 2","Question 3","Question 4","Question 5","Question 6","Question 7","Question 8","Question 9","Question 10"};
+    private String[] answerList;
 
 
 
@@ -31,10 +35,12 @@ public class HighscoreFrame {
      * Initializes the frame.
      * @param user
      */
-    public HighscoreFrame(User user,int numberOfPoints){
+    public HighscoreFrame(User user,int numberOfPoints, String[] correctAlretnatives, String[] answerList){
 
         this.numberOfPoints = numberOfPoints;
         this.user = user;
+        this.correctAlternatives = correctAlretnatives;
+        this.answerList = answerList;
 
         frame = new JFrame();
         frame.setBounds(0, 0, 600, 400);
@@ -62,6 +68,7 @@ public class HighscoreFrame {
         JPanel southPanel = new JPanel();
         southPanel.setPreferredSize(new Dimension(300,301));
         southPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        southPanel.setLayout(new GridLayout(1,3));
 
         JPanel northPanel = new JPanel();
         northPanel.setPreferredSize(new Dimension(300,60));
@@ -77,8 +84,22 @@ public class HighscoreFrame {
         Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         userPicture = new ImageIcon(newimg);
 
+        JList qlist = new JList(questionList);
+        JList list = new JList(correctAlternatives);
+        JList aList = new JList(answerList);
 
+        Font font = new Font("Areal", Font.BOLD,16);
 
+        list.setBackground(null);
+        qlist.setBackground(null);
+        aList.setBackground(null);
+        list.setFont(font);
+        qlist.setFont(font);
+        aList.setFont(font);
+
+        southPanel.add(qlist);
+        southPanel.add(list);
+        southPanel.add(aList);
 
         JLabel userNameLabel = new JLabel();
         userNameLabel.setPreferredSize(new Dimension(60,40));

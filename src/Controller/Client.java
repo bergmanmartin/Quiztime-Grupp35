@@ -27,6 +27,9 @@ public class Client {
     private int numOfPoints = 0;
     private User user;
 
+    private String[] correctalteratives = new String[10];
+    private String[] answeList = new String[10];
+
     /**
      * Initializes the gameface and sets up the client with the server connection.
      * @param ip
@@ -95,7 +98,7 @@ public class Client {
                         gameface.setVisible(false);
                         running = false;
                         System.out.println("Jag lever forfarande!!!");
-                        new HighscoreFrame(user,numOfPoints);
+                        new HighscoreFrame(user,numOfPoints,correctalteratives, answeList);
 
                     }
                 }
@@ -116,6 +119,7 @@ public class Client {
         public void newQuestions(int counter){
 
             gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
+            correctalteratives[counter] = questions[counter].getCorrectAlternative();
         }
 
         /**
@@ -126,6 +130,8 @@ public class Client {
 
             System.out.println("Chosen alternative: " + gameface.getSelectedButton());
             System.out.println("Correct alternative: " + questions[counter].getCorrectAlternative());
+
+            answeList[counter] = gameface.getSelectedButton();
 
             if (gameface.getSelectedButton().equals(questions[counter].getCorrectAlternative())){
 

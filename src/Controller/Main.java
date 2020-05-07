@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author Martkus Gerdtsson
  * @author Erik Nielsen
  */
-public class Main {
+public class  Main {
 
     public static void main(String[] args) {
         new LoginController();
