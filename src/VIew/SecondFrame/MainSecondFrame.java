@@ -156,7 +156,7 @@ public class MainSecondFrame {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    Client Client = new Client("127.0.0.1", 2343);
+                    Client Client = new Client("127.0.0.1", 2343,user);
                 } else if (playWithFriendsButton.isSelected()) {
                     //kod som kopplar ihop spelaren ed motståndare.
                 }

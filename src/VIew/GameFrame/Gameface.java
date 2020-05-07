@@ -19,8 +19,6 @@ public class Gameface extends JFrame {
     //JLabels
     private JLabel question = new JLabel();
     //JButtons
-
-
     private ButtonGroup buttonGroup = new ButtonGroup();
 
     private JButton firstAlternative = new JButton();
@@ -28,7 +26,7 @@ public class Gameface extends JFrame {
     private JButton thirdAlternative = new JButton();
     private JButton forthAlternative = new JButton();
 
-    private JButton selectedButton = new JButton();
+    private JButton selectedButton;
 
     //JProgressbar
     private JProgressBar jProgressBar = new JProgressBar();
@@ -126,6 +124,7 @@ public class Gameface extends JFrame {
                         // delay the thread
                         Thread.sleep(1000);
                         i += 10;
+
                     }
                 } catch (Exception e) {
             }
@@ -143,6 +142,14 @@ public class Gameface extends JFrame {
      * @param alternative4
      */
     public void setQuestion(String question1, String alternative1, String alternative2, String alternative3, String alternative4){
+
+        if (selectedButton != null){
+            removeOldSelectedButton();
+            resetButtons();
+        }
+        selectedButton = new JButton();
+
+
         question.setText(question1);
 
         firstAlternative.setText(alternative1);
@@ -150,10 +157,7 @@ public class Gameface extends JFrame {
         thirdAlternative.setText(alternative3);
         forthAlternative.setText(alternative4);
 
-        if (selectedButton != null){
-            //removeOldSelectedButton();
-            resetButtons();
-        }
+
 
         FillThread fillThread = new FillThread();
         fillThread.start();
@@ -171,7 +175,7 @@ public class Gameface extends JFrame {
                     removeOldSelectedButton();
                 }
                 selectedButton = firstAlternative;
-                //setSelectedButton(selectedButton);
+                setSelectedButton(selectedButton);
                 firstAlternative.setSelected(true);
             }
 
@@ -184,7 +188,7 @@ public class Gameface extends JFrame {
                     removeOldSelectedButton();
                 }
                 selectedButton = secondAlternative;
-               // setSelectedButton(selectedButton);
+                setSelectedButton(selectedButton);
                 secondAlternative.setSelected(true);
             }
 
@@ -197,7 +201,7 @@ public class Gameface extends JFrame {
                     removeOldSelectedButton();
                 }
                 selectedButton = thirdAlternative;
-                //setSelectedButton(selectedButton);
+                setSelectedButton(selectedButton);
                 thirdAlternative.setSelected(true);
             }
 
@@ -210,7 +214,7 @@ public class Gameface extends JFrame {
                   removeOldSelectedButton();
                 }
                 selectedButton = forthAlternative;
-                //etSelectedButton(selectedButton);
+                setSelectedButton(selectedButton);
                 forthAlternative.setSelected(true);
             }
 
@@ -237,8 +241,10 @@ public class Gameface extends JFrame {
      */
     public void setSelectedButton(JButton selectedButton){
 
-        selectedButton.setBackground(Color.green);
+        selectedButton.setBackground(Color.yellow);
     }
+
+
 
     /**
      * Returnns the text in the selected button.
@@ -252,11 +258,19 @@ public class Gameface extends JFrame {
      * Resets all the Buttons so they are deselcted.
      */
     public void resetButtons() {
-
         firstAlternative.setSelected(false);
         secondAlternative.setSelected(false);
         thirdAlternative.setSelected(false);
         forthAlternative.setSelected(false);
+
+    }
+
+    public void setColorToGreenJButton(){
+        selectedButton.setBackground(Color.green);
+    }
+
+    public void setColorToRedJButton(){
+        selectedButton.setBackground(Color.RED);
 
     }
 }

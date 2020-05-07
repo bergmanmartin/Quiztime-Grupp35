@@ -1,8 +1,11 @@
 package Controller;
 
 import Model.QuestionModel.Questions;
+import Model.Users.User;
 import VIew.GameFrame.Gameface;
+import VIew.Highscore.HighscoreFrame;
 
+import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -11,7 +14,7 @@ import java.net.UnknownHostException;
  * Class that represents the client part of the server-client architecture. Considered the controller class for the game.
  * Has contact with the server and gathers information from the player and the server.
  * @author Markus Gerdtsson
- * @author Erik Nielse
+ * @author Erik Nielsen
  * @version 1.0
  */
 public class Client {
@@ -22,14 +25,15 @@ public class Client {
     private Gameface gameface;
     private Questions[] questions = new Questions[10];
     private int numOfPoints = 0;
+    private User user;
 
     /**
      * Initializes the gameface and sets up the client with the server connection.
      * @param ip
      * @param port
      */
-    public Client(String ip, int port){
-
+    public Client(String ip, int port, User user){
+        this.user = user;
         this.gameface = new Gameface();
         this.ip = ip;
         this.port = port;
@@ -52,7 +56,7 @@ public class Client {
      * question is read.
      */
     private class ClientGo extends Thread{
-
+        private volatile boolean running = true;
         //Tar nästa fråga
         private int counterOfQuestion = 0;
 
@@ -70,19 +74,30 @@ public class Client {
                 }
 
 
-                while (true) {
+                while (running) {
                     //Eventuellt en if-sats här?
+
                     newQuestions(counterOfQuestion);
 
-                    sleep(10000);
+                    sleep(100);
 
                     getAlternative(counterOfQuestion);
+                    sleep(200);
+
 
                     //gameface.getSelectedKnapp().setSelected(false);
 
                     counterOfQuestion += 1;
 
-                    System.out.println(numOfPoints);
+                    System.out.println("Points:" + numOfPoints);
+
+                    if (counterOfQuestion == 10){
+                        gameface.setVisible(false);
+                        running = false;
+                        System.out.println("Jag lever forfarande!!!");
+                        new HighscoreFrame(user,numOfPoints);
+
+                    }
                 }
 
             } catch (InterruptedException e) {
@@ -109,12 +124,16 @@ public class Client {
          */
         public void getAlternative(int counter){
 
-            System.out.println(gameface.getSelectedButton());
-            System.out.println(questions[counter].getCorrectAlternative());
+            System.out.println("Chosen alternative: " + gameface.getSelectedButton());
+            System.out.println("Correct alternative: " + questions[counter].getCorrectAlternative());
 
             if (gameface.getSelectedButton().equals(questions[counter].getCorrectAlternative())){
 
                 numOfPoints += 1;
+                gameface.setColorToGreenJButton();
+            }
+            else {
+                gameface.setColorToRedJButton();
             }
 
         }
