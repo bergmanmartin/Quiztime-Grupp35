@@ -17,13 +17,13 @@ public class LoginController {
     private String file;
     private String filePath;
 
-<<<<<<< HEAD
+
     public LoginController (){
         loginFrame = new LoginFrame(this);
 
     }
 
-=======
+
     /**
      * Initializes loginFrame
      */
@@ -36,28 +36,17 @@ public class LoginController {
      * @param name the typed in username
      * @return
      */
->>>>>>> Comment
+
     public boolean checkUsername(String name){
         boolean match = name.matches("[a-zA-Z0-9]+");
         return match;
     }
-
-<<<<<<< HEAD
-/*
-    public User createUser() {
-        User user = new User(loginPanel.getUsernname(), loginPanel.getImage());
-
-        userlist.add(user);
-        return user;
-    }
-*/
-
-=======
+    
     /**
      * Method for image selection.
      * @return
      */
->>>>>>> Comment
+
     public String selectedImage() {
         JFileChooser imageChooser = new JFileChooser();
         int chosenImage = imageChooser.showOpenDialog(null);
