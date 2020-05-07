@@ -15,7 +15,8 @@ import java.io.IOException;
 /**
  * Class of the Loginframe with gui and functionality.
  * @version 1.0
- * @author martinbergman.
+ * @author martinbergman
+ * @author Marianne Mukanga
  */
 
 
@@ -70,7 +71,10 @@ public class LoginFrame extends JPanel {
             loginFrame.setResizable(false);
         }
 
-        private void settingImagePanel() {
+    /**
+     * Creates the upper half of the login frame.
+     */
+    private void settingImagePanel() {
             pnlImage.setPreferredSize(new Dimension(120, 120));
             pnlImage.setMaximumSize(new Dimension(120, 120));
             //pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
@@ -89,7 +93,7 @@ public class LoginFrame extends JPanel {
         }
 
         /**
-         * Method for constructing the "bottom half" of the login frame.
+         * Methods for constructing the "bottom half" of the login frame.
          */
         private void settingSignInPanel() {
             pnlLoginTf.setLayout(new BoxLayout(pnlLoginTf, BoxLayout.X_AXIS));
@@ -112,8 +116,10 @@ public class LoginFrame extends JPanel {
             add(pnlLoginBtn);
         }
 
-
-        public void buttonActions() {
+    /**
+     * Method for the button listeners.
+     */
+    public void buttonActions() {
 
                 imageBtn.addActionListener(new ActionListener() {
                     @Override
@@ -137,8 +143,10 @@ public class LoginFrame extends JPanel {
                 });
         }
 
-
-            public void setUserName() {
+    /**
+     * Sets the username to the entered one if the premises are alright. If not, error message.
+     */
+    public void setUserName() {
                 if (controller.checkUsername(loginTf.getText()) == true) {
                     correctName = true;
                 } else {
@@ -146,8 +154,10 @@ public class LoginFrame extends JPanel {
                 }
             }
 
-
-            public void setImageLbl() {
+    /**
+     * Sets the profile image to the selected image from the filechooser. The image is then scaled and shown in the panel.
+     */
+    public void setImageLbl() {
 
                 String filepath = controller.selectedImage();
 
@@ -162,13 +172,22 @@ public class LoginFrame extends JPanel {
                 } else {
                     JOptionPane.showMessageDialog(null, "Only jpg or png fileformat.");
                 }
-            }
+        }
 
+    /**
+     * Returns the input from the textfield.
+     * @return username String.
+     */
     public String getUsernname() {
             return loginTf.getText();
     }
 
-
+    /**
+     * Inner class that handles the amount of characters limit.
+     * @author Martin Bergman
+     * @author Marianne Mukanga
+     * @version 1ö0
+     */
     private class JTextFieldLimit extends PlainDocument {
         private int limit;
 
@@ -177,6 +196,13 @@ public class LoginFrame extends JPanel {
             this.limit = limit;
         }
 
+        /**
+         * Method that doesnt allow more than a certain number of characters being typed in.
+         * @param offset
+         * @param str
+         * @param attr
+         * @throws BadLocationException
+         */
         public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
             if (str == null) return;
 
@@ -185,17 +211,34 @@ public class LoginFrame extends JPanel {
             }
         }
     }
+<<<<<<< HEAD
     
             public void proceedLogin() throws IOException {
+=======
 
-                if (correctName && correctImage == true) {
-                    loginFrame.setVisible(false);
+    //TEST
+>>>>>>> Comment
 
-                    User user = new User(loginTf.getText(), userPicture);
+    /**
+     * Checks for correct login details and creates a User-object and switches frame.
+     * @throws IOException
+     */
 
+    public void proceedLogin() throws IOException {
+
+<<<<<<< HEAD
                     SecondFrame mains = new SecondFrame(user);
                 }
+=======
+            if (correctName && correctImage == true) {
+                loginFrame.setVisible(false);
+
+                User user = new User(loginTf.getText(), userPicture);
+
+                MainSecondFrame mains = new MainSecondFrame(user);
+>>>>>>> Comment
             }
+        }
 
 
 

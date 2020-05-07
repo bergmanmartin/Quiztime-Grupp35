@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @Created 11/02/2020
- * @project
- * @Markus Gerdtsson
+ * Entity class that stores the User-object.
+ * @author Martin Bergman
+ * @author Markus Gerdtsson
  */
 
 public class User {
@@ -19,6 +19,10 @@ public class User {
         this.userPicture = userPicture;
     }
 
+    /**
+     * Returns the username
+     * @return String
+     */
     public  String getUsername() {
         return username;
     }
@@ -27,6 +31,10 @@ public class User {
         this.username = username;
     }
 
+    /**
+     * Returns the image.
+     * @return imageIcon
+     */
     public ImageIcon getUserPicture() {
         return userPicture;
     }

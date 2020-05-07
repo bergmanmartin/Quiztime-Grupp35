@@ -5,6 +5,11 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Class that handles login functionality.
+ * @author martinbergman.
+ * @version 1.0
+ */
 public class LoginController {
     private LoginFrame loginFrame;
     private User user;
@@ -12,16 +17,32 @@ public class LoginController {
     private String file;
     private String filePath;
 
+<<<<<<< HEAD
     public LoginController (){
         loginFrame = new LoginFrame(this);
 
     }
 
+=======
+    /**
+     * Initializes loginFrame
+     */
+    public LoginController (){
+        loginFrame = new LoginFrame(this);
+    }
+
+    /**
+     * Checks the username for valid character
+     * @param name the typed in username
+     * @return
+     */
+>>>>>>> Comment
     public boolean checkUsername(String name){
         boolean match = name.matches("[a-zA-Z0-9]+");
         return match;
     }
 
+<<<<<<< HEAD
 /*
     public User createUser() {
         User user = new User(loginPanel.getUsernname(), loginPanel.getImage());
@@ -31,6 +52,12 @@ public class LoginController {
     }
 */
 
+=======
+    /**
+     * Method for image selection.
+     * @return
+     */
+>>>>>>> Comment
     public String selectedImage() {
         JFileChooser imageChooser = new JFileChooser();
         int chosenImage = imageChooser.showOpenDialog(null);
@@ -41,12 +68,6 @@ public class LoginController {
             } catch (Exception e) {}
         }
         return filePath;
-    }
-
-
-
-    public User getUser() {
-        return user;
     }
 
 }

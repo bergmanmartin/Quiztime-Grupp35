@@ -8,9 +8,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * @Created 11/02/2020
- * @project QuizTime
- * @Markus Gerdtsson
+ * Class that represents the client part of the server-client architecture. Considered the controller class for the game.
+ * Has contact with the server and gathers information from the player and the server.
+ * @author Markus Gerdtsson
+ * @author Erik Nielsen
+ * @version 1.0
  */
 
 
@@ -23,6 +25,11 @@ public class Client {
     private Questions[] questions = new Questions[10];
     private int numOfPoints = 0;
 
+    /**
+     * Initializes the gameface and sets up the client with the server connection.
+     * @param ip
+     * @param port
+     */
     public Client(String ip, int port){
 
         this.gameface = new Gameface();
@@ -42,7 +49,8 @@ public class Client {
     }
 
     /**
-     * Inner class that run the thread
+     * Inner class that run the thread. Runs the client and retrieves information form the server.
+     * Reads the question objects. After 10 seconds a newquestion is read.
      */
     private class ClientGo extends Thread{
 
@@ -71,7 +79,6 @@ public class Client {
 
                             getAlternative(counterOfQuestion);
 
-                            //gameface.getSelectedKnapp().setSelected(false);
 
                             counterOfQuestion += 1;
 
@@ -92,16 +99,23 @@ public class Client {
          * @param counter
          */
 
+
         public void newQuestions(int counter){
 
             gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
         }
 
         /**
+<<<<<<< HEAD
          * Collecting the alternative the player chooses
          * @param counter
          */
 
+=======
+         * Checks the alternative and checks if the answer is correct and then adds a point if the condicition is fullfilled.
+         * @param counter questions counter
+         */
+>>>>>>> Comment
         public void getAlternative(int counter){
 
             System.out.println(gameface.getSelectedButton());

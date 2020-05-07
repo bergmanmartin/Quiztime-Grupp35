@@ -11,9 +11,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * Class that is the main page of the program with options to start the game
+ * and shows highscore list and connected users.
+ * @author Markus Gerdtsson
+ * @author Marianne Mukanga
+ * @version 1.0
  */
 public class SecondFrame {
 
@@ -32,8 +34,16 @@ public class SecondFrame {
     private JRadioButton playAloneButton;
     private JRadioButton playWithFriendsButton;
 
+<<<<<<< HEAD:src/VIew/SecondFrame/SecondFrame.java
 
     public SecondFrame(User user){
+=======
+    /**
+     * Initializes the frame.
+     * @param user
+     */
+    public MainSecondFrame(User user){
+>>>>>>> Comment:src/VIew/SecondFrame/MainSecondFrame.java
 
         this.user = user;
 
@@ -54,6 +64,9 @@ public class SecondFrame {
 
     }
 
+    /**
+     * Creates the topleft part of the panel with belonging components.
+     */
     public void topLeft(){
 
         topleftPanel = new JPanel();
@@ -75,6 +88,9 @@ public class SecondFrame {
         frame.add(topleftPanel);
     }
 
+    /**
+     * Creates the topright oart with belonging components.
+     */
     public void topRight() {
         toprightPanel = new JPanel();
 
@@ -96,6 +112,9 @@ public class SecondFrame {
         frame.add(toprightPanel);
     }
 
+    /**
+     * Bottom left part of the frame with belonging components
+     */
     public void bottomLeft() {
 
         bottomLeftPanel = new JPanel();
