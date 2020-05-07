@@ -143,7 +143,6 @@ public class MainSecondFrame {
                 } else if (playWithFriendsButton.isSelected()) {
                     frame.setVisible(false);
                     Client client = new Client("127.0.0.1", 3000, user);
-                    Client clients = new Client("127.0.0.1", 3000, user);
                     new PlayWithFriendsFrame(user, client);
                 }
             }

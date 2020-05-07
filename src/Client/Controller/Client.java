@@ -5,6 +5,7 @@ package Client.Controller;
 import Client.Model.Questions;
 import Client.Model.User;
 import Client.View.Gameface;
+import Client.View.PlayWithFriendsFrame;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -33,7 +34,8 @@ public class Client {
 
     public Client(String ip, int port, User user){
 
-        this.gameface = new Gameface();
+        //this.gameface = new Gameface();
+        new PlayWithFriendsFrame(user, this);
         this.ip = ip;
         this.port = port;
         this.user = user;
@@ -60,20 +62,25 @@ public class Client {
         public ClientConnecter() throws IOException {
 
             oos = new ObjectOutputStream(socket.getOutputStream());
-            ois = new ObjectInputStream(socket.getInputStream());
-
+            //ois = new ObjectInputStream(socket.getInputStream());
 
 
         }
         public void run(){
-
             try {
                 oos.writeObject(user);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                oos.flush();
 
-            while(true){
+                ois = new ObjectInputStream(socket.getInputStream());
+
+                while(true){
+
+
+                }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 try {
 
                     User a = (User) ois.readObject();
@@ -90,8 +97,6 @@ public class Client {
 
         }
 
-
-    }
 
 
     private class ClientGo extends Thread{

@@ -63,7 +63,7 @@ public class Server {
                     try{
                         socket = serverSocket.accept();
 
-                        new clientList(socket);
+                        new clientList(socket).start();
 
                         //new clientHandler(socket);
 
@@ -95,11 +95,13 @@ public class Server {
             try {
 
                 ois = new ObjectInputStream(socket.getInputStream());
-                oos = new ObjectOutputStream(socket.getOutputStream());
+                //oos = new ObjectOutputStream(socket.getOutputStream());
 
                 User user = (User) ois.readObject();
 
-                userList.add(user);
+                System.out.println(object.);
+
+                userList.add();
 
                 for (Socket socket1 : socketList) {
                     for (User user1 : userList) {

@@ -1,6 +1,7 @@
 package Client.Model;
 
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  * @Created 11/02/2020
@@ -8,7 +9,7 @@ import javax.swing.*;
  * @Markus Gerdtsson
  */
 
-public class User {
+public class User implements Serializable {
     private String username;
     private ImageIcon userPicture;
 
