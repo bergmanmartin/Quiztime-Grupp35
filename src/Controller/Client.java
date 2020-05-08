@@ -5,7 +5,6 @@ import Model.Users.User;
 import VIew.GameFrame.Gameface;
 import VIew.Highscore.HighscoreFrame;
 
-import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
