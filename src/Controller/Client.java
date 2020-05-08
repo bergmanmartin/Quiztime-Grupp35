@@ -82,7 +82,7 @@ public class Client {
 
                     newQuestions(counterOfQuestion);
 
-                    sleep(100);
+                    sleep(2000);
 
                     getAlternative(counterOfQuestion);
                     sleep(200);
