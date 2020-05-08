@@ -79,7 +79,7 @@ public class HighscoreFrame {
         JPanel southPanel = new JPanel();
         southPanel.setPreferredSize(new Dimension(300,301));
         southPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        southPanel.setLayout(new GridLayout(1,3));
+        southPanel.setLayout(new BorderLayout());
 
         JPanel northPanel = new JPanel();
         northPanel.setPreferredSize(new Dimension(300,60));
@@ -95,9 +95,23 @@ public class HighscoreFrame {
         Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         userPicture = new ImageIcon(newimg);
 
+        JTextField lblquestion = new JTextField("Questions:");
+        JTextField lblcorrect = new JTextField("Correct:");
+        JTextField lblyourAnswer = new JTextField("Answer:");
+
+        JPanel southListPanel = new JPanel();
+        JPanel southHeaderPanel = new JPanel();
+        southHeaderPanel.setLayout(new GridLayout(1,3));
+        southHeaderPanel.setPreferredSize(new Dimension(300,20));
+
+        southListPanel.setLayout(new GridLayout(1,3));
         JList qlist = new JList(questionList);
         JList list = new JList(correctAlternatives);
         JList aList = new JList(answerList);
+
+        lblquestion.setPreferredSize(new Dimension(100,40));
+        lblcorrect.setPreferredSize(new Dimension(100,40));
+        lblyourAnswer.setPreferredSize(new Dimension(100,40));
 
         Font font = new Font("Areal", Font.BOLD,16);
 
@@ -108,9 +122,27 @@ public class HighscoreFrame {
         qlist.setFont(font);
         aList.setFont(font);
 
-        southPanel.add(qlist);
-        southPanel.add(list);
-        southPanel.add(aList);
+        lblquestion.setBackground(null);
+        lblcorrect.setBackground(null);
+        lblyourAnswer.setBackground(null);
+        lblcorrect.setFont(font);
+        lblquestion.setFont(font);
+        lblyourAnswer.setFont(font);
+
+        lblcorrect.setEditable(false);
+        lblquestion.setEditable(false);
+        lblyourAnswer.setEditable(false);
+
+
+        southHeaderPanel.add(lblquestion);
+        southHeaderPanel.add(lblcorrect);
+        southHeaderPanel.add(lblyourAnswer);
+        southListPanel.add(qlist);
+        southListPanel.add(list);
+        southListPanel.add(aList);
+
+        southPanel.add(southHeaderPanel, BorderLayout.NORTH);
+        southPanel.add(southListPanel,BorderLayout.SOUTH);
 
         JLabel userNameLabel = new JLabel();
         userNameLabel.setPreferredSize(new Dimension(60,40));
