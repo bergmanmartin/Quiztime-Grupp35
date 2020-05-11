@@ -41,6 +41,7 @@ public class Gameface extends JFrame {
         setLocation(900, 450);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
         setNorthPanel();
@@ -67,6 +68,7 @@ public class Gameface extends JFrame {
         northPanel.setSize(600, 150);
         question.setFont(question.getFont().deriveFont(16.0f));
         northPanel.add(question);
+        northPanel.setBackground(Color.orange);
         add(northPanel, BorderLayout.NORTH);
     }
 
@@ -80,6 +82,7 @@ public class Gameface extends JFrame {
         jProgressBar.setPreferredSize(new Dimension(400, 50));
         centerPanel.setLayout(new GridBagLayout());
         centerPanel.add(jProgressBar);
+        centerPanel.setBackground(Color.orange);
         add(centerPanel, BorderLayout.CENTER);
     }
 
@@ -89,6 +92,7 @@ public class Gameface extends JFrame {
     public void setSouthPanel() {
         southPanel.setSize(new Dimension(400, 200));
         southPanel.setLayout(new GridLayout(2,2));
+        southPanel.setBackground(Color.red);
 
         firstAlternative.setPreferredSize(new Dimension(150, 100));
         secondAlternative.setPreferredSize(new Dimension(150, 100));

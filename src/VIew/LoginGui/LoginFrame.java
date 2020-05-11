@@ -2,7 +2,9 @@ package VIew.LoginGui;
 
 import Model.Users.User;
 import VIew.SecondFrame.MainSecondFrame;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -14,9 +16,10 @@ import java.io.IOException;
 
 /**
  * Class of the Loginframe with gui and functionality.
- * @version 1.0
+ *
  * @author martinbergman
  * @author Marianne Mukanga
+ * @version 1.0
  */
 
 
@@ -35,6 +38,7 @@ public class LoginFrame extends JPanel {
     private JPanel pnlImageBtn = new JPanel();
     private JPanel pnlLoginTf = new JPanel();
     private JPanel pnlLoginBtn = new JPanel();
+    private JPanel pnlTitle = new JPanel();
 
 
     private JLabel imageLbl = new JLabel();
@@ -43,11 +47,12 @@ public class LoginFrame extends JPanel {
     private boolean correctName = false;
 
 
-
     private JFrame loginFrame;
 
 
     private LoginController controller;
+
+    private JLabel title = new JLabel("GuiZtime");
 
 
     public LoginFrame(LoginController controller) {
@@ -58,139 +63,165 @@ public class LoginFrame extends JPanel {
         settingSignInPanel();
         settingButtonPanel();
         setPreferredSize(new Dimension(600, 400));
+        setBackground(Color.ORANGE);
+       // title();
         initWinow();
         buttonActions();
-    }
 
+    }
 
 
     /**
      * Method for initatilizing the window frame for the loginscreen
      */
 
-        public void initWinow() {
-            loginFrame = new JFrame("Welcome to QuizTime!");
-            loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            loginFrame.add(this);
-            loginFrame.pack();
-            loginFrame.setVisible(true);
-            loginFrame.setLocationRelativeTo(null);
-            loginFrame.setResizable(false);
-        }
+    public void initWinow() {
+        loginFrame = new JFrame("Welcome to QuizTime!");
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.add(this);
+        loginFrame.pack();
+        loginFrame.setVisible(true);
+        loginFrame.setLocationRelativeTo(null);
+        loginFrame.setResizable(false);
+    }
 
+    private void title() {
+        title.setLayout(new BoxLayout(loginFrame,BoxLayout.X_AXIS));
+
+        pnlTitle.setPreferredSize(new Dimension(120, 120));
+        pnlTitle.setMaximumSize(new Dimension(120, 120));
+        Border b41 = BorderFactory.createLineBorder(Color.red,3);
+        pnlTitle.setBorder(b41);
+        //pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
+
+        pnlTitle.add(title);
+        add(Box.createVerticalStrut(20));
+        add(pnlTitle);
+
+
+    }
     /**
      * Creates the upper half of the login frame.
      */
     private void settingImagePanel() {
-            pnlImage.setPreferredSize(new Dimension(120, 120));
-            pnlImage.setMaximumSize(new Dimension(120, 120));
-            //pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
+        pnlImage.setPreferredSize(new Dimension(120, 120));
+        pnlImage.setMaximumSize(new Dimension(120, 120));
+        Border b41 = BorderFactory.createLineBorder(Color.red,3);
+        pnlImage.setBorder(b41);
+        //pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
 
-            pnlImage.add(imageLbl);
+        pnlImage.add(imageLbl);
 
 
-            pnlImageBtn.setLayout(new BoxLayout(pnlImageBtn, BoxLayout.X_AXIS));
-            pnlImageBtn.setPreferredSize(new Dimension(100, 40));
-            pnlImageBtn.add(imageBtn);
+        pnlImageBtn.setLayout(new BoxLayout(pnlImageBtn, BoxLayout.X_AXIS));
+        pnlImageBtn.setPreferredSize(new Dimension(100, 40));
+        pnlImageBtn.add(imageBtn);
+        pnlImageBtn.setBackground(Color.orange);
 
-            add(Box.createVerticalStrut(40));
-            add(pnlImage);
-            add(Box.createVerticalStrut(20));
-            add(pnlImageBtn);
-        }
+        add(Box.createVerticalStrut(40));
+        add(pnlImage);
+        add(Box.createVerticalStrut(20));
+        add(pnlImageBtn);
+    }
 
-        /**
-         * Methods for constructing the "bottom half" of the login frame.
-         */
-        private void settingSignInPanel() {
-            pnlLoginTf.setLayout(new BoxLayout(pnlLoginTf, BoxLayout.X_AXIS));
-            pnlLoginTf.setPreferredSize(new Dimension(300, 40));
-            pnlLoginTf.setMaximumSize(new Dimension(300, 40));
+    /**
+     * Methods for constructing the "bottom half" of the login frame.
+     */
+    private void settingSignInPanel() {
+        pnlLoginTf.setLayout(new BoxLayout(pnlLoginTf, BoxLayout.X_AXIS));
+        pnlLoginTf.setPreferredSize(new Dimension(300, 40));
+        pnlLoginTf.setMaximumSize(new Dimension(300, 40));
+        pnlLoginTf.setBackground(Color.red);
+        Border b41 = BorderFactory.createLineBorder(Color.orange,3);
+        pnlLoginTf.setBorder(b41);
 
-            loginTf.setPreferredSize(new Dimension(190, 20));
-            loginTf.setDocument(new  JTextFieldLimit(10));
-            pnlLoginTf.add(loginTf);
-            add(Box.createVerticalStrut(20));
-            add(pnlLoginTf);
-        }
+        loginTf.setPreferredSize(new Dimension(190, 20));
+        loginTf.setDocument(new JTextFieldLimit(10));
+        pnlLoginTf.add(loginTf);
+        add(Box.createVerticalStrut(20));
+        add(pnlLoginTf);
+    }
 
-        public void settingButtonPanel() {
-            pnlLoginBtn.setLayout(new BoxLayout(pnlLoginBtn, BoxLayout.X_AXIS));
-            pnlLoginBtn.setPreferredSize(new Dimension(80, 80));
-            loginBtn.setPreferredSize(new Dimension(80, 40));
-            pnlLoginBtn.add(loginBtn);
-            add(Box.createVerticalStrut(20));
-            add(pnlLoginBtn);
-        }
+    public void settingButtonPanel() {
+        pnlLoginBtn.setLayout(new BoxLayout(pnlLoginBtn, BoxLayout.X_AXIS));
+        pnlLoginBtn.setPreferredSize(new Dimension(80, 80));
+        loginBtn.setPreferredSize(new Dimension(80, 40));
+        pnlLoginBtn.setBackground(Color.orange);
+        pnlLoginBtn.add(loginBtn);
+        add(Box.createVerticalStrut(20));
+        add(pnlLoginBtn);
+    }
 
     /**
      * Method for the button listeners.
      */
     public void buttonActions() {
 
-                imageBtn.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        setImageLbl();
-                    }
-                });
+        imageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setImageLbl();
+            }
+        });
 
 
-                loginBtn.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        setUserName();
-                        try {
-                            proceedLogin();
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
+        loginBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setUserName();
+                try {
+                    proceedLogin();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
 
-                });
-        }
+        });
+    }
 
     /**
      * Sets the username to the entered one if the premises are alright. If not, error message.
      */
     public void setUserName() {
-                if (controller.checkUsername(loginTf.getText()) == true) {
-                    correctName = true;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Only numbers and letters are allowed in username.");
-                }
-            }
+        if (controller.checkUsername(loginTf.getText()) == true) {
+            correctName = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Only numbers and letters are allowed in username.");
+        }
+    }
 
     /**
      * Sets the profile image to the selected image from the filechooser. The image is then scaled and shown in the panel.
      */
     public void setImageLbl() {
 
-                String filepath = controller.selectedImage();
+        String filepath = controller.selectedImage();
 
-                if (filepath == null) {
-                    return;
-                } else if (filepath.endsWith(".png") || filepath.endsWith(".jpg")) {
-                    userPicture = new ImageIcon(filepath);
-                    Image image = userPicture.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-                    userPicture = new ImageIcon(image);
-                    imageLbl.setIcon(userPicture);
-                    correctImage = true;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Only jpg or png fileformat.");
-                }
+        if (filepath == null) {
+            return;
+        } else if (filepath.endsWith(".png") || filepath.endsWith(".jpg")) {
+            userPicture = new ImageIcon(filepath);
+            Image image = userPicture.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            userPicture = new ImageIcon(image);
+            imageLbl.setIcon(userPicture);
+            correctImage = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Only jpg or png fileformat.");
         }
+    }
 
     /**
      * Returns the input from the textfield.
+     *
      * @return username String.
      */
     public String getUsernname() {
-            return loginTf.getText();
+        return loginTf.getText();
     }
 
     /**
      * Inner class that handles the amount of characters limit.
+     *
      * @author Martin Bergman
      * @author Marianne Mukanga
      * @version 1ö0
@@ -205,12 +236,13 @@ public class LoginFrame extends JPanel {
 
         /**
          * Method that doesnt allow more than a certain number of characters being typed in.
+         *
          * @param offset
          * @param str
          * @param attr
          * @throws BadLocationException
          */
-        public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
             if (str == null) return;
 
             if ((getLength() + str.length()) <= limit) {
@@ -223,23 +255,21 @@ public class LoginFrame extends JPanel {
 
     /**
      * Checks for correct login details and creates a User-object and switches frame.
+     *
      * @throws IOException
      */
 
     public void proceedLogin() throws IOException {
 
-            if (correctName && correctImage == true) {
-                loginFrame.setVisible(false);
+        if (correctName && correctImage == true) {
+            loginFrame.setVisible(false);
 
-                User user = new User(loginTf.getText(), userPicture);
+            User user = new User(loginTf.getText(), userPicture);
 
-                MainSecondFrame mains = new MainSecondFrame(user);
-            }
+            MainSecondFrame mains = new MainSecondFrame(user);
         }
-
-
-
     }
+}
 
 
 

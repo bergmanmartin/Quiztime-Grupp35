@@ -58,19 +58,26 @@ public class HighscoreFrame {
      */
     public void Left(){
         leftPanel = new JPanel();
+        leftPanel.setBackground(Color.ORANGE);
 
         JPanel southPanel = new JPanel();
         southPanel.setPreferredSize(new Dimension(300,301));
         southPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        southPanel.setBackground(Color.ORANGE);
 
         JPanel northPanel = new JPanel();
         northPanel.setPreferredSize(new Dimension(300,60));
         northPanel.setLayout(new GridLayout(1,2));
 
+        //User
         JPanel northLeftPanel = new JPanel();
         northLeftPanel.setPreferredSize(new Dimension(150,60));
-        northLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        //northLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        TitledBorder titledBorder1 = BorderFactory.createTitledBorder("Player");
+        titledBorder1.setTitleColor(Color.red);
+        northLeftPanel.setBorder(titledBorder1);
         northLeftPanel.setLayout(new GridLayout(1,2));
+        northLeftPanel.setBackground(Color.ORANGE);
 
         JLabel imageLabel = new JLabel();
         Image image = user.getUserPicture().getImage();
@@ -88,16 +95,19 @@ public class HighscoreFrame {
         imageLabel.setIcon(userPicture);
         northLeftPanel.add(userNameLabel, BorderLayout.EAST);
 
-
+        //Score
         JPanel northRightPanel = new JPanel();
         northRightPanel.setPreferredSize(new Dimension(150,60));
-        northRightPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        northRightPanel.setBorder(BorderFactory.createLineBorder(Color.red));
         TitledBorder titledBorder = BorderFactory.createTitledBorder("Points");
+        titledBorder.setTitleColor(Color.red);
         northRightPanel.setBorder(titledBorder);
+        northRightPanel.setBackground(Color.ORANGE);
 
         JLabel numberOfPointsLabel = new JLabel();
         numberOfPointsLabel.setText(String.valueOf(numberOfPoints));
         northRightPanel.add(numberOfPointsLabel);
+        numberOfPointsLabel.setBackground(Color.ORANGE);
 
         northPanel.add(northLeftPanel);
         northPanel.add(northRightPanel);

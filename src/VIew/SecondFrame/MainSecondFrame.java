@@ -47,6 +47,7 @@ public class MainSecondFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(2,2));
         frame.setTitle("QuizTime");
+
         //Fill JFrame
         topLeft();
         topRight();
@@ -71,12 +72,14 @@ public class MainSecondFrame {
         JLabel imageLBL = new JLabel();
 
         topleftPanel.setLayout(new GridBagLayout());
-        topleftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        //topleftPanel.setBorder(BorderFactory.createLineBorder(Color.red,3));
+        topleftPanel.setBackground(Color.orange);
 
         //username.setSize(100,75);
         username.setText(user.getUsername());
         imageLBL.setIcon(user.getUserPicture());
         imagePanel.add(imageLBL);
+        imagePanel.setBackground(Color.orange);
 
         topleftPanel.add(imagePanel);
         topleftPanel.add(username);
@@ -90,10 +93,11 @@ public class MainSecondFrame {
     public void topRight() {
         toprightPanel = new JPanel();
 
-
         toprightPanel.setBorder(BorderFactory.createTitledBorder(" Contact Register "));
 
         toprightPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+
+        toprightPanel.setBackground(Color.orange);
 
         JList list = new JList();
 
@@ -116,7 +120,8 @@ public class MainSecondFrame {
 
         bottomLeftPanel = new JPanel();
         bottomLeftPanel.setLayout(new GridLayout(2,2));
-        bottomLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        //bottomLeftPanel.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+        bottomLeftPanel.setBackground(Color.orange);
 
         //RadioButtons + button group
         playAloneButton = new JRadioButton("Play Alone");
@@ -169,8 +174,13 @@ public class MainSecondFrame {
     public void bottomRight() {
 
         bottomRightPanel = new JPanel();
+        bottomRightPanel.setBackground(Color.orange);
 
         frame.add(bottomRightPanel);
+    }
+
+    public void bottomBottom() {
+        bottomRightPanel = new JPanel();
     }
 
 }
