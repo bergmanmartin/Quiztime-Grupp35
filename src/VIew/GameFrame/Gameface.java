@@ -92,7 +92,6 @@ public class Gameface extends JFrame {
     public void setSouthPanel() {
         southPanel.setSize(new Dimension(400, 200));
         southPanel.setLayout(new GridLayout(2,2));
-        southPanel.setBackground(Color.red);
 
         firstAlternative.setPreferredSize(new Dimension(150, 100));
         secondAlternative.setPreferredSize(new Dimension(150, 100));
@@ -181,6 +180,7 @@ public class Gameface extends JFrame {
                 selectedButton = firstAlternative;
                 setSelectedButton(selectedButton);
                 firstAlternative.setSelected(true);
+
             }
 
         });
@@ -194,6 +194,7 @@ public class Gameface extends JFrame {
                 selectedButton = secondAlternative;
                 setSelectedButton(selectedButton);
                 secondAlternative.setSelected(true);
+
             }
 
         });
