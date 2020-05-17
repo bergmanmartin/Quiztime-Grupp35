@@ -3,7 +3,7 @@ package Client.View;
 
 
 import Client.Controller.Client;
-import Client.Model.User;
+import SharedResources.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
  */
 public class MainSecondFrame {
 
-    private User user;
+    private SharedResources.User user;
 
     private JFrame frame;
 
@@ -138,9 +138,10 @@ public class MainSecondFrame {
                 if(playAloneButton.isSelected()) {
                     frame.setVisible(false);
 
-                    Client Client = new Client("127.0.0.1", 2343);
+                    Client Client = new Client("127.0.0.1", 2343, user);
+
                 } else if (playWithFriendsButton.isSelected()) {
-                    //kod som kopplar ihop spelaren ed motståndare.
+                    Client Client = new Client("127.0.0.1", 2343, user, false);
                 }
             }
         });

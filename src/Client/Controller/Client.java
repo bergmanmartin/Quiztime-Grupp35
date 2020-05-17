@@ -2,13 +2,19 @@ package Client.Controller;
 
 
 
-import Client.Model.Questions;
+import Client.View.PlayWithFriendsFrame;
+import SharedResources.Message;
+import SharedResources.Questions;
 import Client.View.Gameface;
+import SharedResources.User;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.LinkedList;
 
 /**
  * @Created 11/02/2020
@@ -21,14 +27,19 @@ public class Client {
     private int port;
     private Socket socket;
     private Gameface gameface;
+    private PlayWithFriendsFrame playWithFriendsFrame;
     private Questions[] questions = new Questions[10];
     private int numOfPoints = 0;
+    private User user;
+    //private LinkedList<> userlist = new LinkedList<>();
+    private boolean ready;
 
-    public Client(String ip, int port){
+    public Client(String ip, int port, User user){
 
         this.gameface = new Gameface();
         this.ip = ip;
         this.port = port;
+        this.user = user;
 
         try {
             socket = new Socket(ip,port);
@@ -42,11 +53,33 @@ public class Client {
         }
 
     }
-    //BRB toa!!!
 
-    private class ClientGo extends Thread{
+    public Client(String ip, int port, User user, boolean ready){
 
-        private int counter = 0;
+        this.playWithFriendsFrame = new PlayWithFriendsFrame(this, user);
+        this.ready = ready;
+        this.ip = ip;
+        this.port = port;
+        this.user = user;
+
+        try {
+            socket = new Socket(ip,port);
+
+            new ClientGo().start();
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private class clientGoSolo extends Thread{
+
+        private volatile boolean running = true;
+        //Tar nästa fråga
+        private int counterOfQuestion = 0;
 
         public void run(){
 
@@ -54,26 +87,40 @@ public class Client {
 
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
+
                 for (int i = 0; i < 10; i++) {
 
                     questions[i] = (Questions) inputStream.readObject();
+                    //gameface.resetButtons();
                 }
 
 
-                while(true) {
+                while (running) {
+                    //Eventuellt en if-sats här?
 
-                    newQuestions(counter);
+
+                    newQuestions(counterOfQuestion);
 
                     sleep(10000);
 
-                    getAlternative(counter);
+                    getAlternative(counterOfQuestion);
+                    sleep(1500);
 
-                    counter += 1;
 
-                    System.out.println(numOfPoints);
+                    //gameface.getSelectedKnapp().setSelected(false);
 
+                    counterOfQuestion += 1;
+
+                    System.out.println("Points:" + numOfPoints);
+
+                    if (counterOfQuestion == 10){
+                        gameface.setVisible(false);
+                        running = false;
+                        System.out.println("Jag lever forfarande!!!");
+                        //new HighscoreFrame(user,numOfPoints,correctalteratives, answeList);
+
+                    }
                 }
-
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -83,24 +130,82 @@ public class Client {
                 e.printStackTrace();
             }
         }
-
-        public void newQuestions(int counter){
-
-            gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
-        }
-
-        public void getAlternative(int counter){
-
-            System.out.println(gameface.getSelectedButton());
-            System.out.println(questions[counter].getCorrectAlternative());
-
-            if (gameface.getSelectedButton().equals(questions[counter].getCorrectAlternative())){
-
-                numOfPoints += 1;
-            }
-
-        }
-
     }
 
+
+    private class ClientGo extends Thread{
+
+        private int counter = 0;
+
+        public void run(){
+
+            try {
+
+
+                ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+
+                outputStream.writeObject(user);
+                outputStream.flush();
+
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+
+
+
+
+                while(true) {
+
+                    String s = dataInputStream.readUTF();
+
+                    if (s.equals("ny")){
+                        playWithFriendsFrame.clearList();
+                    }
+                    else {
+                        playWithFriendsFrame.updateList(s);
+                    }
+
+
+
+                    //playWithFriendsFrame.addElement();
+
+
+
+                    /*
+                    switch (message.getTyp()){
+
+                        case "Questions":
+                            //NY innre klass'
+                            break;
+
+                        case "User":
+                            userlist = message;
+
+                    }*/
+
+
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        }
+    public void newQuestions(int counter){
+
+        gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
+    }
+
+    public void getAlternative(int counter){
+
+        System.out.println(gameface.getSelectedButton());
+        System.out.println(questions[counter].getCorrectAlternative());
+
+        if (gameface.getSelectedButton().equals(questions[counter].getCorrectAlternative())){
+
+            numOfPoints += 1;
+        }
+    }
 }
+

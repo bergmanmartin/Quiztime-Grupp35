@@ -2,7 +2,7 @@ package Client.View.LoginGui;
 
 
 
-import Client.Model.User;
+import SharedResources.User;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class LoginController {
     private LoginFrame loginFrame;
-    private User user;
-    private ArrayList<User> userlist = new ArrayList<User>();
+    private SharedResources.User user;
+    private ArrayList<User> userlist = new ArrayList<>();
     private String file;
     private String filePath;
   //  private LayoutExample startPage;
@@ -71,7 +71,7 @@ public class LoginController {
 
 
 
-    public User getUser() {
+    public SharedResources.User getUser() {
         return user;
     }
 

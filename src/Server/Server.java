@@ -2,9 +2,12 @@ package Server;
 
 
 
+import SharedResources.User;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
 
 /**
  * @Created 11/02/2020
@@ -18,12 +21,23 @@ public class Server {
 
     private Questions[] gameQuestions;
 
+    private LinkedList<User> userLinkedList;
+
+    private ServerFrame sf;
+
+    private boolean gameStarted = false;
+
+
 
     public Server(int port) throws IOException {
 
         qr = new QuestionReader();
 
         gameQuestions = qr.getQuestions();
+
+        userLinkedList = new LinkedList<>();
+
+        sf = new ServerFrame(this);
 
 
 
@@ -46,20 +60,38 @@ public class Server {
 
                 System.out.println("lyssnar på port nr" + serverSocket.getLocalPort());
 
-                while (true){
+                while (userLinkedList.size() <= 4){
                     try{
                         socket = serverSocket.accept();
                         new clientHandler(socket);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
 
+                while (allReady() == false){
+
+                    sleep(500);
+
+                }
+
+                new QuestionSender(socket);
+
             }
-            catch (IOException e ){
+            catch (IOException | InterruptedException e ){
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean allReady(){
+        for (User user : userLinkedList) {
+            if (user.isReady() == false){
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -70,8 +102,10 @@ public class Server {
 
         private int index = 0;
 
+        private DataOutputStream dataOutputStream;
 
         public clientHandler(Socket socket) {
+
 
 
             this.socket = socket;
@@ -83,6 +117,42 @@ public class Server {
 
         public void run() {
 
+
+            while (!Thread.interrupted()) {
+
+                try {
+
+                    //dos = new DataOutputStream(socket.getOutputStream());
+
+
+                    ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+
+                    userLinkedList.add((User) inputStream.readObject());
+
+                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+                    sendUsers();
+
+
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        public void sendUsers() throws IOException {
+
+            dataOutputStream.writeUTF("ny");
+
+            for (int i  = 0; i<userLinkedList.size(); i++) {
+                dataOutputStream.writeUTF(userLinkedList.get(i).getUsername());
+            }
+        }
+    }
+
+
+    private class QuestionSender extends Thread{
+
+        public QuestionSender(Socket socket) throws IOException {
 
             while (!Thread.interrupted()) {
 
@@ -104,6 +174,7 @@ public class Server {
                 }
             }
         }
+
     }
 
 

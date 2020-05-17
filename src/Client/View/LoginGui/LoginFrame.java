@@ -1,8 +1,8 @@
 package Client.View.LoginGui;
 
 
-import Client.Model.User;
 import Client.View.MainSecondFrame;
+import SharedResources.User;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
@@ -201,7 +201,7 @@ public class LoginFrame extends JPanel {
                 if (correctName && correctImage == true) {
                     loginFrame.setVisible(false);
 
-                    User user = new User(loginTf.getText(), userPicture);
+                    SharedResources.User user = new User(loginTf.getText(), userPicture, false);
 
                     MainSecondFrame mains = new MainSecondFrame(user);
                 }

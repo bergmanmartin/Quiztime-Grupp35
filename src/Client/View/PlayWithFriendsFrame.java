@@ -3,7 +3,7 @@ package Client.View;
 
 
 import Client.Controller.Client;
-import Client.Model.User;
+import SharedResources.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * @Created 11/02/2020
@@ -21,7 +22,7 @@ public class PlayWithFriendsFrame {
 
     private Client client;
 
-    private User user;
+    private SharedResources.User user;
 
     private JFrame frame;
 
@@ -42,8 +43,10 @@ public class PlayWithFriendsFrame {
 
     private ArrayList<User> users;
 
+    DefaultListModel<String> listModel = new DefaultListModel<>();
 
-    public PlayWithFriendsFrame(Client client, User user){
+
+    public PlayWithFriendsFrame(Client client, SharedResources.User user){
 
         this.user = user;
         this.client = client;
@@ -96,15 +99,13 @@ public class PlayWithFriendsFrame {
 
         toprightPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 
-        list = new JList((ListModel) users);
+        list = new JList<>(listModel);
+
 
         Font font = new Font("Courier New", Font.PLAIN, 10);
         list.setFont(font);
 
-        list.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         list.setPreferredSize(new Dimension(300, 200));
-
-
 
         toprightPanel.add(list);
 
@@ -155,11 +156,7 @@ public class PlayWithFriendsFrame {
                    // } catch (IOException ex) {
                      //   ex.printStackTrace();
                    // }
-
-
-                    Client Client = new Client("127.0.0.1", 2343);
-                } else if (playWithFriendsButton.isSelected()) {
-                    //kod som kopplar ihop spelaren ed motståndare.
+                    
                 }
             }
         });
@@ -174,9 +171,26 @@ public class PlayWithFriendsFrame {
         frame.add(bottomRightPanel);
     }
 
-    public void updateList(){
 
+    public void updateList(String s){
 
+        listModel.addElement(s);
     }
+
+    public void clearList(){
+        listModel.clear();
+    }
+/*
+    public void addElement(LinkedList s){
+        listModel.clear();
+        for (Object o : s) {
+            listModel.add(o)
+        }
+        listModel.add(s.ge)
+        List<LinkedList> contacts = s;
+        JList contactsView = new JList(contacts.toArray());
+        }
+
+    }*/
 
 }

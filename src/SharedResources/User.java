@@ -1,6 +1,7 @@
-package Client.Model;
+package SharedResources;
 
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  * @Created 11/02/2020
@@ -8,14 +9,16 @@ import javax.swing.*;
  * @Markus Gerdtsson
  */
 
-public class User {
+public class User implements Serializable {
     private String username;
     private ImageIcon userPicture;
+    private boolean ready;
 
 
-    public User(String username, ImageIcon userPicture) {
+    public User(String username, ImageIcon userPicture, boolean ready) {
         this.username = username;
         this.userPicture = userPicture;
+        this.ready = ready;
     }
 
     public  String getUsername() {
@@ -30,5 +33,13 @@ public class User {
     }
     public void setUserPicture(ImageIcon userPicture) {
         this.userPicture = userPicture;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
 }
