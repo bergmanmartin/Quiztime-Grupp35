@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
  * This class is the server which controls the different questions and communicates with the client.
  */
-public class Server {
+public class Server{
 
 
     private QuestionReader qr;
@@ -23,6 +23,8 @@ public class Server {
     private LinkedList<User> userLinkedList;
 
     private ServerFrame sf;
+
+    private boolean allnotReady = true;
 
     private boolean gameStarted = false;
 
@@ -51,6 +53,7 @@ public class Server {
     }
 
 
+
     /**
      * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
      * This class is a thread which controls the different connections made to the server.
@@ -77,14 +80,14 @@ public class Server {
 
                 System.out.println("lyssnar på port nr" + serverSocket.getLocalPort());
 
-                while (userLinkedList.size() <= 4){
                     try{
                         socket = serverSocket.accept();
+
                         new clientHandler(socket);
 
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+
                 }
 
                 while (allReady() == false){
@@ -127,8 +130,6 @@ public class Server {
 
         public clientHandler(Socket socket) {
 
-
-
             this.socket = socket;
 
             start();
@@ -155,6 +156,11 @@ public class Server {
                     ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
                     userLinkedList.add((User) inputStream.readObject());
+
+                    if (userLinkedList.getFirst().isReady()){
+                        new QuestionSender(socket);
+                        break;
+                    }
 
                     dataOutputStream = new DataOutputStream(socket.getOutputStream());
 

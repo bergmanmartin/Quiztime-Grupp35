@@ -2,6 +2,7 @@ package Client.Controller;
 
 
 
+import Client.View.HighscoreFrame;
 import Client.View.PlayWithFriendsFrame;
 import SharedResources.Message;
 import SharedResources.Questions;
@@ -34,17 +35,21 @@ public class Client {
     //private LinkedList<> userlist = new LinkedList<>();
     private boolean ready;
 
+    private String[] correctalteratives = new String[10];
+    private String[] answerList = new String[10];
+
     public Client(String ip, int port, User user){
 
         this.gameface = new Gameface();
         this.ip = ip;
         this.port = port;
         this.user = user;
+        ready = true;
 
         try {
             socket = new Socket(ip,port);
 
-            new ClientGo().start();
+            new ClientGoSolo().start();
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -75,7 +80,7 @@ public class Client {
 
     }
 
-    private class clientGoSolo extends Thread{
+    private class ClientGoSolo extends Thread{
 
         private volatile boolean running = true;
         //Tar nästa fråga
@@ -85,13 +90,20 @@ public class Client {
 
             try {
 
+
+                ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+
+                outputStream.writeObject(user);
+                outputStream.flush();
+
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
 
                 for (int i = 0; i < 10; i++) {
 
                     questions[i] = (Questions) inputStream.readObject();
-                    //gameface.resetButtons();
+                    gameface.resetButtons();
+
                 }
 
 
@@ -117,7 +129,7 @@ public class Client {
                         gameface.setVisible(false);
                         running = false;
                         System.out.println("Jag lever forfarande!!!");
-                        //new HighscoreFrame(user,numOfPoints,correctalteratives, answeList);
+                        new HighscoreFrame(user,numOfPoints,correctalteratives, answerList);
 
                     }
                 }
@@ -195,6 +207,7 @@ public class Client {
     public void newQuestions(int counter){
 
         gameface.setQuestion(questions[counter].getQuestion(),questions[counter].getAlternative1(),questions[counter].getAlternative2(),questions[counter].getAlternative3(),questions[counter].getAlternative4());
+        correctalteratives[counter] = questions[counter].getCorrectAlternative();
     }
 
     public void getAlternative(int counter){
@@ -202,9 +215,16 @@ public class Client {
         System.out.println(gameface.getSelectedButton());
         System.out.println(questions[counter].getCorrectAlternative());
 
+        answerList[counter] = gameface.getSelectedButton();
+
         if (gameface.getSelectedButton().equals(questions[counter].getCorrectAlternative())){
 
             numOfPoints += 1;
+            gameface.setColorToGreenJButton();
+        }
+
+        else{
+            gameface.setColorToRedJButton();
         }
     }
 }
