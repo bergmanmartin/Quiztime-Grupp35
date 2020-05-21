@@ -3,9 +3,8 @@ package Server;
 import java.io.Serializable;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * This class contains all data with game questions. Alternatives and answers are stored in this class.
  */
 public class Questions implements Serializable {
 
@@ -16,6 +15,15 @@ public class Questions implements Serializable {
     private String alternative4;
     private String correctAlternative;
 
+    /**
+     * Initializes the different alternatives and correctAlternative which is passed on and filled by the @QuestionReader class.
+     * @param question
+     * @param alternative1
+     * @param alternative2
+     * @param alternative3
+     * @param alternative4
+     * @param correctAlternative
+     */
     public Questions(String question, String alternative1, String alternative2, String alternative3, String alternative4, String correctAlternative){
 
         this.question = question;
@@ -26,26 +34,49 @@ public class Questions implements Serializable {
         this.correctAlternative = correctAlternative;
     }
 
+    /**
+     *
+     * @return the game questions with all data
+     */
     public String getQuestion() {
         return question;
     }
 
+    /**
+     *
+     * @return first alternative for the question
+     */
     public String getAlternative1() {
         return alternative1;
     }
 
+    /**
+     *
+     * @return second alternative for the question
+     */
     public String getAlternative2() {
         return alternative2;
     }
 
+    /**
+     *
+     * @return third alternative for the question
+     */
     public String getAlternative3() {
         return alternative3;
     }
 
+    /**
+     *
+     * @return fourth alternative for the question
+     */
     public String getAlternative4() {
         return alternative4;
     }
-
+    /**
+     *
+     * @return correct alternative for the question
+     */
     public String getCorrectAlternative() {
         return correctAlternative;
     }

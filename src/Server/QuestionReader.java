@@ -8,14 +8,18 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * @Author Markus Gerdtsson,Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * This class reads the questions from text files and fills it into an array.
  */
 public class QuestionReader {
 
     private Questions[] questions;
 
+
+    /**
+     * Reads the files "Questions" and takes every line in order and fills it in an array.
+     * Fills the Questions class with the lines read from the textfile.
+     */
     public QuestionReader(){
 
         try {
@@ -42,6 +46,10 @@ public class QuestionReader {
 
     }
 
+    /**
+     *
+     * @return questions.
+     */
     public Questions[] getQuestions() {
         return questions;
     }

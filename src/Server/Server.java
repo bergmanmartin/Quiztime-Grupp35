@@ -10,9 +10,8 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * This class is the server which controls the different questions and communicates with the client.
  */
 public class Server {
 
@@ -28,7 +27,14 @@ public class Server {
     private boolean gameStarted = false;
 
 
-
+    /**
+     * Initializes the class QuestionReader.
+     * Collects the questions from the array.
+     * Initializes a new LinkedList and starts a new ServerFrame.
+     * Starts class Connection.
+     * @param port port for the server
+     * @throws IOException
+     */
     public Server(int port) throws IOException {
 
         qr = new QuestionReader();
@@ -45,13 +51,24 @@ public class Server {
     }
 
 
-
+    /**
+     * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * This class is a thread which controls the different connections made to the server.
+     */
     private class Connection extends Thread{
         private int port;
 
+        /**
+         * @param port the connection port
+         * @throws IOException
+         */
         public Connection(int port) throws IOException {
             this.port = port;
         }
+
+        /**
+         * Initializes a new serverSocket, accepts new connections and creates class clientHandler.
+         */
         public void run(){
             Socket socket = null;
             System.out.println("servern staartad");
@@ -95,6 +112,10 @@ public class Server {
     }
 
 
+    /**
+     * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * This class handles the different clients and adds user data.
+     */
     private class clientHandler extends Thread {
 
         private Socket socket;
@@ -115,6 +136,12 @@ public class Server {
         }
 
 
+        /**
+         * Initializes a new ObjectInputStream and socket gets InputStream.
+         * Adds user data to the LinkedList and reads the object.
+         * Initializes a new DataOutputStream and socket gets OutputStream.
+         * Then calls the method sendUsers.
+         */
         public void run() {
 
 
@@ -139,6 +166,11 @@ public class Server {
                 }
             }
         }
+
+        /**
+         * DataOutputStream writes the LinkedList different index for the username.
+         * @throws IOException
+         */
         public void sendUsers() throws IOException {
 
             dataOutputStream.writeUTF("ny");
@@ -150,8 +182,19 @@ public class Server {
     }
 
 
+    /**
+     *@Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * This class writes the gameQuestions in an ObjectOutputStream.
+     */
     private class QuestionSender extends Thread{
 
+
+        /**
+         * Initializes a new ObjectOutputStream and tells the socket to get the OutputStream.
+         * Writes the gameQuestions class with it's different index 10 times in a for-loop.
+         * @param socket
+         * @throws IOException
+         */
         public QuestionSender(Socket socket) throws IOException {
 
             while (!Thread.interrupted()) {

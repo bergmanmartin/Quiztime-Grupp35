@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.io.Serializable;
 
 /**
- * @Created 11/02/2020
- * @project
- * @Markus Gerdtsson
+ * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
  */
 
 public class User implements Serializable {

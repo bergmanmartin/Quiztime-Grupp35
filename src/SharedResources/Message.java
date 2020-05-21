@@ -3,9 +3,7 @@ package SharedResources;
 import java.util.LinkedList;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
  */
 public class Message {
 

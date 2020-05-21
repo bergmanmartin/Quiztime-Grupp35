@@ -3,9 +3,8 @@ package Server;
 import javax.swing.*;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * This class contains the JFrame for the server.
  */
 public class ServerFrame extends JFrame {
     private JList<String> countryList;
@@ -25,6 +24,11 @@ public class ServerFrame extends JFrame {
         this.setVisible(true);
 
     }
+
+    /**
+     * Adds and element to the ListModel.
+     * @param s
+     */
     public void addElement(String s){
         listModel.addElement(s);
 
