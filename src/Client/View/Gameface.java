@@ -1,9 +1,9 @@
 package Client.View;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * Class that represents the game frame with all the questions.
+ * @version 1.0
+ * @author Martin Bergman, Markus Gerdtsson, Erik Nielsen, Marianne Mukanga
  */
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +28,9 @@ public class Gameface extends JFrame {
     //JProgressbar
     private JProgressBar jProgressBar = new JProgressBar();
 
+    /**
+     * Constructs the game frame
+     */
     public Gameface() {
         //Setting up the QuestionsGUI JFrame
         this.setTitle("Questions!");
@@ -75,6 +78,10 @@ public class Gameface extends JFrame {
         add(southPanel, BorderLayout.SOUTH);
 
     }
+
+    /**
+     * Inner class that limits the time to 10 seconds on the progressbar
+     */
     private class FillThread extends Thread {
 
 
@@ -100,6 +107,14 @@ public class Gameface extends JFrame {
 
     }
 
+    /**
+     * Sets the question and the answers on the buttons.
+     * @param question1
+     * @param alternative1
+     * @param alternative2
+     * @param alternative3
+     * @param alternative4
+     */
     public void setQuestion(String question1, String alternative1, String alternative2, String alternative3, String alternative4){
         question.setText(question1);
         firstAlternative.setText(alternative1);
@@ -115,6 +130,9 @@ public class Gameface extends JFrame {
         fillThread.start();
     }
 
+    /**
+     * Sets listeners for the buttons
+     */
     public void setActionListeners(){
 
         firstAlternative.addActionListener(new ActionListener() {
@@ -169,18 +187,29 @@ public class Gameface extends JFrame {
 
     }
 
+    /**
+     * Resets the button visibility
+     */
     public void removeOldSelectedButton(){
 
         selectedButton.setBackground(null);
 
     }
 
+    /**
+     * Sets the right answer to the green background
+     * @param selectedButton
+     */
     public void setSelectedButton(JButton selectedButton){
 
         selectedButton.setBackground(Color.GREEN);
 
     }
 
+    /**
+     * Returns the answer of the button
+     * @return
+     */
     public String getSelectedButton(){
         return selectedButton.getText();
     }

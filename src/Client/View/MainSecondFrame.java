@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * Class with the main menu and its options.
+ * @author martinbergman. Erik Nielsen, Markus Gerdtsson, Marianne Mukanga.
+ * @verstion 1.2
  */
 public class MainSecondFrame {
 
@@ -32,7 +32,10 @@ public class MainSecondFrame {
     private JRadioButton playAloneButton;
     private JRadioButton playWithFriendsButton;
 
-
+    /**
+     * Constructs the main menu
+     * @param user
+     */
     public MainSecondFrame(User user){
 
         this.user = user;
@@ -54,6 +57,9 @@ public class MainSecondFrame {
 
     }
 
+    /**
+     * Handles the top left part of the frame.
+     */
     public void topLeft(){
 
         topleftPanel = new JPanel();
@@ -76,6 +82,9 @@ public class MainSecondFrame {
         frame.add(topleftPanel);
     }
 
+    /**
+     * Handles the top right part of the frame
+     */
     public void topRight() {
         toprightPanel = new JPanel();
 
@@ -98,6 +107,9 @@ public class MainSecondFrame {
         frame.add(toprightPanel);
     }
 
+    /**
+     * Initializes the botttom left part of the frame
+     */
     public void bottomLeft() {
 
         bottomLeftPanel = new JPanel();
@@ -148,6 +160,9 @@ public class MainSecondFrame {
         frame.add(bottomLeftPanel);
     }
 
+    /**
+     * Constructs the bottom right panel
+     */
     public void bottomRight() {
 
         bottomRightPanel = new JPanel();

@@ -5,6 +5,7 @@ import Client.Model.User;
 import Client.View.MainSecondFrame;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -16,8 +17,8 @@ import java.io.IOException;
 
 /**
  * Class of the Loginframe with gui and functionality.
- * @version 1.0
- * @author martinbergman.
+ * @version 1.2
+ * @author martinbergman, Marianne Mukanga, Erik Nielsen, Markus Gerdtsson
  */
 
 
@@ -49,7 +50,10 @@ public class LoginFrame extends JPanel {
 
     private LoginController controller;
 
-
+    /**
+     * Constructs the frame
+     * @param controller
+     */
     public LoginFrame(LoginController controller) {
 
         this.controller = controller;
@@ -78,13 +82,15 @@ public class LoginFrame extends JPanel {
             loginFrame.setResizable(false);
         }
 
-        private void settingImagePanel() {
+    /**
+     * Sets the panel where the slected image will appear and the button
+     */
+    private void settingImagePanel() {
             pnlImage.setPreferredSize(new Dimension(120, 120));
             pnlImage.setMaximumSize(new Dimension(120, 120));
-            //pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
+            pnlImage.setBorder(new LineBorder(Color.RED, 1));
 
             pnlImage.add(imageLbl);
-
 
             pnlImageBtn.setLayout(new BoxLayout(pnlImageBtn, BoxLayout.X_AXIS));
             pnlImageBtn.setPreferredSize(new Dimension(100, 40));
@@ -111,7 +117,10 @@ public class LoginFrame extends JPanel {
             add(pnlLoginTf);
         }
 
-        public void settingButtonPanel() {
+    /**
+     * Sets the bottom panel with loginbtn
+     */
+    public void settingButtonPanel() {
             pnlLoginBtn.setLayout(new BoxLayout(pnlLoginBtn, BoxLayout.X_AXIS));
             pnlLoginBtn.setPreferredSize(new Dimension(80, 80));
             loginBtn.setPreferredSize(new Dimension(80, 40));
@@ -120,8 +129,11 @@ public class LoginFrame extends JPanel {
             add(pnlLoginBtn);
         }
 
+    /**
+     * Class that handles the buttonslisteners.
+     */
 
-        public void buttonActions() {
+    public void buttonActions() {
 
                 imageBtn.addActionListener(new ActionListener() {
                     @Override
@@ -145,17 +157,21 @@ public class LoginFrame extends JPanel {
                 });
         }
 
-
-            public void setUserName() {
-                if (controller.checkUsername(loginTf.getText()) == true) {
+    /**
+     * Sets the username to true if it fills the condition with only letters allowed.
+     */
+    public void setUserName() {
+            if (controller.checkUsername(loginTf.getText()) == true) {
                     correctName = true;
-                } else {
+            } else {
                     JOptionPane.showMessageDialog(null, "Only numbers and letters are allowed in username.");
                 }
             }
 
-
-            public void setImageLbl() {
+    /**
+     * Sets the imagelbl from the filepath from the filechooser. Sacles the image and makes it appear in the loginframe.
+     */
+    public void setImageLbl() {
 
                 String filepath = controller.selectedImage();
 
@@ -172,11 +188,17 @@ public class LoginFrame extends JPanel {
                 }
             }
 
+    /**
+     * Returns the username
+     * @return String username
+     */
     public String getUsernname() {
             return loginTf.getText();
     }
 
-
+    /**
+     * Inner class that limits the username input to 10 characters.
+     */
     private class JTextFieldLimit extends PlainDocument {
         private int limit;
 

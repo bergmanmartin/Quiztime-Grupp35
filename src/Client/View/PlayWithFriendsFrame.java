@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ *
+ * @author martinbergman. Erik Nielsen, Marianne Mukanga, Markus Gerdtsson
+ * @version 1.2
  */
 public class PlayWithFriendsFrame {
 
