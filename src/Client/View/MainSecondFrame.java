@@ -137,10 +137,10 @@ public class MainSecondFrame {
                 //Hämtar vilken knapp som är itryckt och sen utför.
                 if(playAloneButton.isSelected()) {
                     frame.setVisible(false);
-
                     Client Client = new Client("127.0.0.1", 2343, user);
 
                 } else if (playWithFriendsButton.isSelected()) {
+                    frame.setVisible(false);
                     Client Client = new Client("127.0.0.1", 2343, user, false);
                 }
             }

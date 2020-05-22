@@ -11,6 +11,7 @@ public class User implements Serializable {
     private String username;
     private ImageIcon userPicture;
     private boolean ready;
+    private boolean playAlone;
 
 
     public User(String username, ImageIcon userPicture, boolean ready) {
@@ -37,7 +38,15 @@ public class User implements Serializable {
         return ready;
     }
 
-    public void setReady(boolean ready) {
-        this.ready = ready;
+    public void setReadyTrue() {
+        ready = true;
+    }
+
+    public void setPlayAlone(){
+        playAlone = true;
+    }
+
+    public boolean getPlayAlone() {
+        return playAlone;
     }
 }

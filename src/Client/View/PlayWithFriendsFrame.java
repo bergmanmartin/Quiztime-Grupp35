@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * @Created 11/02/2020
@@ -31,11 +30,9 @@ public class PlayWithFriendsFrame {
     private JPanel bottomLeftPanel;
     private JPanel bottomRightPanel;
 
-    private JButton startButton;
+    private JButton readyButton;
     private JButton quitButton;
 
-    private JRadioButton playAloneButton;
-    private JRadioButton playWithFriendsButton;
 
     private JList list;
 
@@ -119,45 +116,33 @@ public class PlayWithFriendsFrame {
         bottomLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
         //RadioButtons + button group
-        playAloneButton = new JRadioButton("Play Alone");
-        playAloneButton.setPreferredSize(new Dimension(200, 60));
-        bottomLeftPanel.add(playAloneButton);
 
-        playWithFriendsButton = new JRadioButton("Play With Friends");
-        playWithFriendsButton.setPreferredSize(new Dimension(200, 60));
-        bottomLeftPanel.add(playWithFriendsButton);
 
         ButtonGroup btngroup = new ButtonGroup();
 
         //Start and quit buttons
-        startButton = new JButton("Start Game");
-        startButton.setPreferredSize(new Dimension(200, 60));
-        startButton.setForeground(Color.GREEN);
-        bottomLeftPanel.add(startButton);
+        readyButton = new JButton("Ready");
+        readyButton.setPreferredSize(new Dimension(200, 60));
+        readyButton.setForeground(Color.GREEN);
+        bottomLeftPanel.add(readyButton);
 
         quitButton = new JButton("Quit");
         quitButton.setPreferredSize(new Dimension(200, 60));
         quitButton.setForeground(Color.RED);
         bottomLeftPanel.add(quitButton);
 
-        btngroup.add(playAloneButton);
-        btngroup.add(playWithFriendsButton);
 
-        startButton.addActionListener(new ActionListener() {
+        readyButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                //Hämtar vilken knapp som är itryckt och sen utför.
-                if(playAloneButton.isSelected()) {
-                    frame.setVisible(false);
-                    //try {
-                      //  Server server = new Server(2343);
-                   // } catch (IOException ex) {
-                     //   ex.printStackTrace();
-                   // }
-                    
+                user.setReadyTrue();
+                try {
+                    client.setReady();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
+
             }
         });
 
@@ -175,22 +160,15 @@ public class PlayWithFriendsFrame {
     public void updateList(String s){
 
         listModel.addElement(s);
+
     }
 
-    public void clearList(){
+    public void clearList() {
         listModel.clear();
     }
-/*
-    public void addElement(LinkedList s){
-        listModel.clear();
-        for (Object o : s) {
-            listModel.add(o)
-        }
-        listModel.add(s.ge)
-        List<LinkedList> contacts = s;
-        JList contactsView = new JList(contacts.toArray());
-        }
 
-    }*/
+    public void Close(){
+        frame.setVisible(false);
+    }
 
 }

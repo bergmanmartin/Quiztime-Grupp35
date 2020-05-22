@@ -1,7 +1,7 @@
 package Server;
 
 
-
+import SharedResources.Questions;
 import SharedResources.User;
 
 import java.io.*;
@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
  * This class is the server which controls the different questions and communicates with the client.
  */
-public class Server{
+public class Server {
 
 
     private QuestionReader qr;
@@ -22,11 +22,15 @@ public class Server{
 
     private LinkedList<User> userLinkedList;
 
+    private LinkedList<clientHandler> clientHandlers;
+
     private ServerFrame sf;
 
     private boolean allnotReady = true;
 
     private boolean gameStarted = false;
+
+    private boolean checking = true;
 
 
     /**
@@ -34,6 +38,7 @@ public class Server{
      * Collects the questions from the array.
      * Initializes a new LinkedList and starts a new ServerFrame.
      * Starts class Connection.
+     *
      * @param port port for the server
      * @throws IOException
      */
@@ -45,20 +50,22 @@ public class Server{
 
         userLinkedList = new LinkedList<>();
 
+        clientHandlers = new LinkedList<>();
+
         sf = new ServerFrame(this);
 
 
+        new StatusChecker().start();
 
         new Connection(port).start();
     }
-
 
 
     /**
      * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
      * This class is a thread which controls the different connections made to the server.
      */
-    private class Connection extends Thread{
+    private class Connection extends Thread {
         private int port;
 
         /**
@@ -72,159 +79,236 @@ public class Server{
         /**
          * Initializes a new serverSocket, accepts new connections and creates class clientHandler.
          */
-        public void run(){
+        public void run() {
             Socket socket = null;
             System.out.println("servern staartad");
 
-            try(ServerSocket serverSocket = new ServerSocket(port)){
+            try (ServerSocket serverSocket = new ServerSocket(port)) {
 
                 System.out.println("lyssnar på port nr" + serverSocket.getLocalPort());
 
-                    try{
+                while (true) {
+                    try {
                         socket = serverSocket.accept();
 
-                        new clientHandler(socket);
+                        clientHandlers.add(new clientHandler(socket));
 
                     } catch (IOException e) {
                         e.printStackTrace();
 
+                    }
+
+                    /*
+                    while (allReady() == false) {
+
+                        sleep(500);
+
+                    }*/
                 }
 
-                while (allReady() == false){
 
-                    sleep(500);
-
-                }
-
-                new QuestionSender(socket);
-
-            }
-            catch (IOException | InterruptedException e ){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public boolean allReady(){
-        for (User user : userLinkedList) {
-            if (user.isReady() == false){
-                return false;
-            }
-        }
-        return true;
-    }
 
+    private class StatusChecker extends Thread {
 
-    /**
-     * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
-     * This class handles the different clients and adds user data.
-     */
-    private class clientHandler extends Thread {
-
-        private Socket socket;
-        private DataOutputStream dos;
-
-        private int index = 0;
-
-        private DataOutputStream dataOutputStream;
-
-        public clientHandler(Socket socket) {
-
-            this.socket = socket;
-
-            start();
-
-        }
-
-
-        /**
-         * Initializes a new ObjectInputStream and socket gets InputStream.
-         * Adds user data to the LinkedList and reads the object.
-         * Initializes a new DataOutputStream and socket gets OutputStream.
-         * Then calls the method sendUsers.
-         */
         public void run() {
 
+            while (checking) {
 
-            while (!Thread.interrupted()) {
 
                 try {
-
-                    //dos = new DataOutputStream(socket.getOutputStream());
-
-
-                    ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-
-                    userLinkedList.add((User) inputStream.readObject());
-
-                    if (userLinkedList.getFirst().isReady()){
-                        new QuestionSender(socket);
-                        break;
-                    }
-
-                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
-
-                    sendUsers();
-
-
-                } catch (IOException | ClassNotFoundException e) {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                if (allReady() == true){
+                    System.out.println(allReady());
+                    new QuestionSender();
+                    checking = false;
+
+                }
+
+                }
             }
-        }
 
-        /**
-         * DataOutputStream writes the LinkedList different index for the username.
-         * @throws IOException
-         */
-        public void sendUsers() throws IOException {
 
-            dataOutputStream.writeUTF("ny");
+        public boolean allReady() {
 
-            for (int i  = 0; i<userLinkedList.size(); i++) {
-                dataOutputStream.writeUTF(userLinkedList.get(i).getUsername());
+            if (userLinkedList.size() < 1){
+                return false;
             }
+
+            for (User user : userLinkedList) {
+                System.out.println(user.isReady());
+                if (user.isReady() == false) {
+                    return false;
+                }
+            }
+            return true;
         }
+    }
+
+
+
+/**
+ * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * This class handles the different clients and adds user data.
+ */
+private class clientHandler extends Thread {
+
+    private Socket socket;
+    private DataOutputStream dos;
+
+    private int index = 0;
+
+    private DataOutputStream dataOutputStream;
+    private ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
+
+    public clientHandler(Socket socket) {
+
+        this.socket = socket;
+
+        start();
+
     }
 
 
     /**
-     *@Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
-     * This class writes the gameQuestions in an ObjectOutputStream.
+     * Initializes a new ObjectInputStream and socket gets InputStream.
+     * Adds user data to the LinkedList and reads the object.
+     * Initializes a new DataOutputStream and socket gets OutputStream.
+     * Then calls the method sendUsers.
      */
-    private class QuestionSender extends Thread{
+    public void run() {
 
 
-        /**
-         * Initializes a new ObjectOutputStream and tells the socket to get the OutputStream.
-         * Writes the gameQuestions class with it's different index 10 times in a for-loop.
-         * @param socket
-         * @throws IOException
-         */
-        public QuestionSender(Socket socket) throws IOException {
+        while (!interrupted())
+            try {
 
-            while (!Thread.interrupted()) {
 
-                try {
+                inputStream = new ObjectInputStream(socket.getInputStream());
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
 
-                    //dos = new DataOutputStream(socket.getOutputStream());
+                User connectedUser = (User) inputStream.readObject();
 
-                    ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+                userLinkedList.add(connectedUser);
 
-                    for(int i = 0; i<10; i++){
-
-                        outputStream.writeObject(gameQuestions[i]);
-                        outputStream.flush();
-
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (connectedUser.getPlayAlone() == true) {
+                    new QuestionSender(socket);
+                    break;
                 }
+
+
+                dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+                sendUsers();
+
+                while(allnotReady){
+                    User u = (User) inputStream.readObject();
+                    for (User user : userLinkedList) {
+                        if(user.getUsername().equals(u.getUsername())){
+                            user.setReadyTrue();
+                        }
+                    }
+                }
+
+
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        }
 
     }
+
+    /**
+     * DataOutputStream writes the LinkedList different index for the username.
+     *
+     * @throws IOException
+     */
+    public void sendUsers() throws IOException {
+
+        for (Server.clientHandler clientHandler1 : clientHandlers) {
+            clientHandler1.dataOutputStream.writeUTF("ny");
+
+            for (int i = 0; i < userLinkedList.size(); i++) {
+                clientHandler1.dataOutputStream.writeUTF(userLinkedList.get(i).getUsername());
+            }
+        }
+    }
+}
+
+
+/**
+ * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * This class writes the gameQuestions in an ObjectOutputStream.
+ */
+private class QuestionSender extends Thread {
+
+
+    /**
+     * Initializes a new ObjectOutputStream and tells the socket to get the OutputStream.
+     * Writes the gameQuestions class with it's different index 10 times in a for-loop.
+     *
+     * @param socket
+     * @throws IOException
+     */
+
+    //For playAlone
+    public QuestionSender(Socket socket) throws IOException, ClassNotFoundException {
+
+
+        try {
+
+
+            for (int i = 0; i < 10; i++) {
+
+                clientHandlers.getFirst().outputStream.writeObject((Questions) gameQuestions[i]);
+                clientHandlers.getFirst().outputStream.flush();
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public QuestionSender() {
+
+        checking = false;
+
+        System.out.println("quiestionsender skapas");
+
+        try {
+
+            for (Server.clientHandler clientHandler : clientHandlers) {
+
+                clientHandler.dataOutputStream.writeUTF("start");
+
+
+
+                for (int i = 0; i < 10; i++) {
+
+
+                    System.out.println("skriver fråga " + i);
+                    clientHandler.outputStream.writeObject((Questions) gameQuestions[i]);
+                    clientHandler.outputStream.flush();
+                }
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
 
 
         /*public void sendQuestions(){
