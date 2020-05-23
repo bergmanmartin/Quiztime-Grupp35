@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 
@@ -28,8 +29,9 @@ public class HighscoreFrame {
     private String[] correctAlternatives;
     private String[] questionList = new String[]{"Question 1", "Question 2","Question 3","Question 4","Question 5","Question 6","Question 7","Question 8","Question 9","Question 10"};
     private String[] answerList;
+    private LinkedList<User> userScoreList;
 
-    private DefaultListModel listModel;
+    DefaultListModel<String> model = new DefaultListModel<>();
 
 
     /**
@@ -38,12 +40,13 @@ public class HighscoreFrame {
 
      */
 
-    public HighscoreFrame(User user,int numberOfPoints, String[] correctAlretnatives, String[] answerList){
+    public HighscoreFrame(User user, int numberOfPoints, String[] correctAlretnatives, String[] answerList, LinkedList userScore){
 
         this.numberOfPoints = numberOfPoints;
         this.user = user;
         this.correctAlternatives = correctAlretnatives;
         this.answerList = answerList;
+        this.userScoreList = userScore;
 
 
         frame = new JFrame();
@@ -212,9 +215,12 @@ public class HighscoreFrame {
         southPanel.add(quitButton);
 
 
-        DefaultListModel<String> model = new DefaultListModel<>();
+
         JList<String> list = new JList<>( model );
+
+        //addElements();
         model.addElement(user.getUsername() + "Score: " + numberOfPoints);
+
         northPanel.add(list,BorderLayout.EAST);
 
         JLabel imageLabel = new JLabel();
@@ -230,6 +236,11 @@ public class HighscoreFrame {
 
         frame.add(rightPanel);
     }
+    /*public void addElements(){
+        for (User user1 : userScoreList) {
+            model.addElement(user1.getUsername() + "Score: " + user1.getPoints());
+        }
+    }*/
 
 
 

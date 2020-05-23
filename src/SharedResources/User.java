@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String username;
     private ImageIcon userPicture;
+    private int points;
     private boolean ready;
     private boolean playAlone;
 
@@ -48,5 +49,13 @@ public class User implements Serializable {
 
     public boolean getPlayAlone() {
         return playAlone;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
