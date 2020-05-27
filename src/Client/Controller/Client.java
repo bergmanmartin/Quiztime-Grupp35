@@ -1,11 +1,11 @@
-package Client.Controller;
+package client.Controller;
 
 
 import Client.View.HighscoreFrame;
-import Client.View.PlayWithFriendsFrame;
+import client.View.PlayWithFriendsFrame;
 import SharedResources.Message;
 import SharedResources.Questions;
-import Client.View.Gameface;
+import client.View.Gameface;
 import SharedResources.User;
 import org.w3c.dom.ls.LSOutput;
 

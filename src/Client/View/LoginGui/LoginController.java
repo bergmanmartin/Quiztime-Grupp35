@@ -1,8 +1,9 @@
-package Client.View.LoginGui;
+package client.View.LoginGui;
 
 
 
 import SharedResources.User;
+import client.View.LoginGui.LoginFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;

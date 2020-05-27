@@ -1,4 +1,4 @@
-package Client.View.LoginGui;
+package client.View.LoginGui;
 
 public class LoginMain {
 

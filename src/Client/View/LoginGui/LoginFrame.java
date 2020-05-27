@@ -1,10 +1,11 @@
-package Client.View.LoginGui;
+package client.View.LoginGui;
 
 
-import Client.View.MainSecondFrame;
+import client.View.MainSecondFrame;
 import SharedResources.User;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -58,6 +59,7 @@ public class LoginFrame extends JPanel {
         settingSignInPanel();
         settingButtonPanel();
         setPreferredSize(new Dimension(600, 400));
+        setBackground(Color.ORANGE);
         initWinow();
         buttonActions();
     }
@@ -81,6 +83,8 @@ public class LoginFrame extends JPanel {
         private void settingImagePanel() {
             pnlImage.setPreferredSize(new Dimension(120, 120));
             pnlImage.setMaximumSize(new Dimension(120, 120));
+            Border b41 = BorderFactory.createLineBorder(Color.red,3);
+            pnlImage.setBorder(b41);
             //pnlImage.setBorder(new LineBorder(Color.BLACK, 1));
 
             pnlImage.add(imageLbl);
@@ -89,6 +93,7 @@ public class LoginFrame extends JPanel {
             pnlImageBtn.setLayout(new BoxLayout(pnlImageBtn, BoxLayout.X_AXIS));
             pnlImageBtn.setPreferredSize(new Dimension(100, 40));
             pnlImageBtn.add(imageBtn);
+            pnlImageBtn.setBackground(Color.ORANGE);
 
             add(Box.createVerticalStrut(40));
             add(pnlImage);
@@ -103,6 +108,9 @@ public class LoginFrame extends JPanel {
             pnlLoginTf.setLayout(new BoxLayout(pnlLoginTf, BoxLayout.X_AXIS));
             pnlLoginTf.setPreferredSize(new Dimension(300, 40));
             pnlLoginTf.setMaximumSize(new Dimension(300, 40));
+            pnlLoginTf.setBackground(Color.red);
+            Border b41 = BorderFactory.createLineBorder(Color.ORANGE,3);
+            pnlLoginTf.setBorder(b41);
 
             loginTf.setPreferredSize(new Dimension(190, 20));
             loginTf.setDocument(new  JTextFieldLimit(10));
@@ -115,6 +123,7 @@ public class LoginFrame extends JPanel {
             pnlLoginBtn.setLayout(new BoxLayout(pnlLoginBtn, BoxLayout.X_AXIS));
             pnlLoginBtn.setPreferredSize(new Dimension(80, 80));
             loginBtn.setPreferredSize(new Dimension(80, 40));
+            pnlLoginBtn.setBackground(Color.ORANGE);
             pnlLoginBtn.add(loginBtn);
             add(Box.createVerticalStrut(20));
             add(pnlLoginBtn);

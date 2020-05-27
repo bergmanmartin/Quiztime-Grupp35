@@ -1,8 +1,8 @@
-package Client.View;
+package client.View;
 
 
 
-import Client.Controller.Client;
+import client.Controller.Client;
 import SharedResources.User;
 
 import javax.swing.*;
@@ -63,12 +63,14 @@ public class MainSecondFrame {
         JLabel imageLBL = new JLabel();
 
         topleftPanel.setLayout(new GridBagLayout());
-        topleftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        //topleftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        topleftPanel.setBackground(Color.ORANGE);
 
         //username.setSize(100,75);
         username.setText(user.getUsername());
         imageLBL.setIcon(user.getUserPicture());
         imagePanel.add(imageLBL);
+        imagePanel.setBackground(Color.ORANGE);
 
         topleftPanel.add(imagePanel);
         topleftPanel.add(username);
@@ -83,6 +85,8 @@ public class MainSecondFrame {
         toprightPanel.setBorder(BorderFactory.createTitledBorder(" Contact Register "));
 
         toprightPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+
+        toprightPanel.setBackground(Color.ORANGE);
 
         JList list = new JList();
 
@@ -102,7 +106,8 @@ public class MainSecondFrame {
 
         bottomLeftPanel = new JPanel();
         bottomLeftPanel.setLayout(new GridLayout(2,2));
-        bottomLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        //bottomLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        bottomLeftPanel.setBackground(Color.ORANGE);
 
         //RadioButtons + button group
         playAloneButton = new JRadioButton("Play Alone");
@@ -152,7 +157,7 @@ public class MainSecondFrame {
     public void bottomRight() {
 
         bottomRightPanel = new JPanel();
-
+        bottomRightPanel.setBackground(Color.orange);
         frame.add(bottomRightPanel);
     }
 
