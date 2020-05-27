@@ -51,6 +51,7 @@ public class MainSecondFrame {
         frame.setVisible(true);
         frame.setResizable(false);            // Prevent user from change size
         frame.setLocationRelativeTo(null);    // Start middle screen
+        frame.setBackground(Color.ORANGE);
 
     }
 

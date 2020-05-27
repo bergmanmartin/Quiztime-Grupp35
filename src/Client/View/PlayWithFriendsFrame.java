@@ -99,10 +99,10 @@ public class PlayWithFriendsFrame {
         list = new JList<>(listModel);
 
 
-        Font font = new Font("Courier New", Font.PLAIN, 10);
+        Font font = new Font("SansSerif Bold", Font.BOLD, 20);
         list.setFont(font);
 
-        list.setPreferredSize(new Dimension(300, 200));
+        list.setPreferredSize(new Dimension(280, 200));
 
         toprightPanel.add(list);
 

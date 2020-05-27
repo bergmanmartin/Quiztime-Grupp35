@@ -34,6 +34,10 @@ public class Client {
     private User user;
     //private LinkedList<> userlist = new LinkedList<>();
     private boolean ready;
+    private boolean waitingForPlayers = true;
+    private int numOfPlayers;
+
+    private LinkedList<User> userScore;
 
     private DataInputStream dataInputStream;
     private ObjectInputStream objectInputStream;
@@ -133,7 +137,8 @@ public class Client {
                         gameface.setVisible(false);
                         running = false;
                         System.out.println("Jag lever forfarande!!!");
-                        new HighscoreFrame(user, numOfPoints, correctalteratives, answerList);
+                        userScore.add(user);
+                        new HighscoreFrame(user, numOfPoints, correctalteratives, answerList, userScore);
 
                     }
                 }
@@ -152,61 +157,60 @@ public class Client {
     private class ClientGo extends Thread {
 
         private int counter = 0;
-
-        public void run() {
-
-            try {
-
-
-                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                objectInputStream = new ObjectInputStream(socket.getInputStream());
-
-                objectOutputStream.writeObject(user);
-                objectOutputStream.flush();
-
-                dataInputStream = new DataInputStream(socket.getInputStream());
-
-
-                while (true) {
-
-                    String s = dataInputStream.readUTF();
-
-                    if (s.equals("ny")) {
-                        playWithFriendsFrame.clearList();
-
-                    } else if (s.equals("start")) {
-                        playWithFriendsFrame.Close();
-                        gameface = new Gameface();
-                        new ClientPlayWithFriends().start();
-
-                    } else {
-                        playWithFriendsFrame.updateList(s);
-                    }
-
-                }
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
-
-    private class ClientPlayWithFriends extends Thread {
-
         private volatile boolean running = true;
+        private boolean readingPoints = true;
         //Tar nästa fråga
         private int counterOfQuestion = 0;
 
 
-
         public void run() {
 
+            while (waitingForPlayers) {
+                try {
+
+
+                    objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                    objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+                    objectOutputStream.writeObject(user);
+                    objectOutputStream.flush();
+
+                    dataInputStream = new DataInputStream(socket.getInputStream());
+
+
+                    while (true) {
+
+                        String s = dataInputStream.readUTF();
+
+                        if (s.equals("ny")) {
+                            playWithFriendsFrame.clearList();
+
+                        } else if (s.equals("start")) {
+                            playWithFriendsFrame.Close();
+                            waitingForPlayers = false;
+                            gameface = new Gameface();
+                            break;
+                            //new ClientPlayWithFriends().start();
+
+
+                        } else {
+                            playWithFriendsFrame.updateList(s);
+                        }
+
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             System.out.println("ehjehje");
 
             try {
+
+                numOfPlayers = Integer.parseInt(dataInputStream.readUTF());
+
+                System.out.println(numOfPlayers);
 
                 for (int i = 0; i < 10; i++) {
 
@@ -239,11 +243,33 @@ public class Client {
                     if (counterOfQuestion == 10) {
                         gameface.setVisible(false);
                         running = false;
-                        System.out.println("Jag lever forfarande!!!");
-                        new HighscoreFrame(user, numOfPoints, correctalteratives, answerList);
+                        user.setPoints(numOfPoints);
+                        /*
+                        objectOutputStream.writeObject(user);
+                        objectOutputStream.flush();
+                        System.out.println("1");
+
+                        for(int i = 0; i < numOfPlayers; i++){
+
+                            User u = (User)objectInputStream.readObject();
+                            userScore.add(u);
+                            System.out.println("2");
+                        }
+                        */
+                        new HighscoreFrame(user, numOfPoints, correctalteratives, answerList, userScore);
+                        break;
+
 
                     }
                 }
+
+                while (readingPoints){
+                    User u = (User)objectInputStream.readObject();
+                    userScore.add(u);
+                }
+
+
+
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -253,13 +279,14 @@ public class Client {
                 e.printStackTrace();
             }
         }
+
+
     }
 
     public void setReady() throws IOException {
         this.ready = true;
         objectOutputStream.writeObject(user);
     }
-
 
 
     public void newQuestions(int counter) {
