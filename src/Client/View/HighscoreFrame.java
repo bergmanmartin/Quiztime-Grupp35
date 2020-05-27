@@ -1,13 +1,14 @@
 package Client.View;
 import SharedResources.User;
+import Client.View.LoginGui.LoginFrame;
 
-import javax.sql.rowset.serial.SerialJavaObject;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.HashMap;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Map;
 
 
 /**
@@ -30,6 +31,12 @@ public class HighscoreFrame {
     private String[] questionList = new String[]{"Question 1", "Question 2","Question 3","Question 4","Question 5","Question 6","Question 7","Question 8","Question 9","Question 10"};
     private String[] answerList;
     private LinkedList<User> userScoreList;
+
+    private JButton playAgainButton;
+    private JButton quitGameButton;
+
+    private LoginFrame loginFrame;
+
 
     DefaultListModel<String> model = new DefaultListModel<>();
 
@@ -204,15 +211,16 @@ public class HighscoreFrame {
         southPanel.setPreferredSize(new Dimension(300,50));
         southPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         southPanel.setLayout(new GridLayout(1,2));
-        JButton playButton = new JButton("Play again");
-        playButton.setSelected(false);
-        JButton quitButton = new JButton("Quit game");
-        playButton.setSelected(false);
+
+        playAgainButton = new JButton("Play again");
+        //playButton.setSelected(false);
+        quitGameButton = new JButton("Quit game");
+        //playButton.setSelected(false);
 
 
 
-        southPanel.add(playButton);
-        southPanel.add(quitButton);
+        southPanel.add(playAgainButton);
+        southPanel.add(quitGameButton);
 
 
 
@@ -235,6 +243,32 @@ public class HighscoreFrame {
 
 
         frame.add(rightPanel);
+
+        addListeners();
+    }
+
+    private void addListeners() {
+        ActionListener listener = new ButtonActionListeners();
+        playAgainButton.addActionListener(listener);
+        quitGameButton.addActionListener(listener);
+
+    }
+
+    class ButtonActionListeners implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == playAgainButton) {
+                try {
+                    loginFrame.proceedLogin();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            } else if (e.getSource() == quitGameButton) {
+                frame.dispose();
+            }
+
+        }
     }
     /*public void addElements(){
         for (User user1 : userScoreList) {

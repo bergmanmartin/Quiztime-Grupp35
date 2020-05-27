@@ -1,4 +1,4 @@
-package client.View;
+package Client.View;
 
 /**
  * This class represents the game and its functions. Handles the selcted alternatives and other progression

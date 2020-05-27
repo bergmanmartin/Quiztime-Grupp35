@@ -1,8 +1,8 @@
-package client.View;
+package Client.View;
 
 
 
-import client.Controller.Client;
+import Client.Controller.Client;
 import SharedResources.User;
 
 import javax.swing.*;

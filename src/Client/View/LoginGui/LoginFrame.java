@@ -1,7 +1,7 @@
-package client.View.LoginGui;
+package Client.View.LoginGui;
 
 
-import client.View.MainSecondFrame;
+import Client.View.MainSecondFrame;
 import SharedResources.User;
 
 import javax.swing.*;

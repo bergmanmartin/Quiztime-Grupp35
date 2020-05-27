@@ -1,13 +1,11 @@
-package client.Controller;
+package Client.Controller;
 
 
 import Client.View.HighscoreFrame;
-import client.View.PlayWithFriendsFrame;
-import SharedResources.Message;
+import Client.View.PlayWithFriendsFrame;
 import SharedResources.Questions;
-import client.View.Gameface;
+import Client.View.Gameface;
 import SharedResources.User;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.DataInputStream;
 import java.io.IOException;
