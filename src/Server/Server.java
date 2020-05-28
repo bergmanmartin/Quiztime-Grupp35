@@ -10,9 +10,13 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 /**
- * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * @project QuizTime
+ * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * @version 1.4
+ *
  * This class is the server which controls the different questions and communicates with the client.
  */
+
 public class Server {
 
 
@@ -58,7 +62,10 @@ public class Server {
 
 
     /**
-     * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @project QuizTime
+     * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @version 1.4
+     *
      * This class is a thread which controls the different connections made to the server.
      */
     private class Connection extends Thread {
@@ -109,7 +116,13 @@ public class Server {
         }
     }
 
-
+    /**
+     * @project QuizTime
+     * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @version 1.4
+     *
+     * This class is a thread which checks if all players are ready to play.
+     */
     private class StatusChecker extends Thread {
 
         public void run() {
@@ -132,7 +145,6 @@ public class Server {
 
             }
         }
-
 
         public boolean allReady() {
 
