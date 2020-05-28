@@ -1,18 +1,20 @@
 package Server;
 
-
 import SharedResources.Questions;
 import SharedResources.User;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 
 /**
- * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * @project QuizTime
+ * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * @version 1.4
+ *
  * This class is the server which controls the different questions and communicates with the client.
  */
+
 public class Server {
 
 
@@ -26,9 +28,8 @@ public class Server {
 
     private boolean allnotReady = true;
 
-    private boolean gameStarted = false;
-
     private boolean checking = true;
+
 
 
     /**
@@ -50,7 +51,6 @@ public class Server {
 
         clientHandlers = new LinkedList<>();
 
-
         new StatusChecker().start();
 
         new Connection(port).start();
@@ -58,7 +58,10 @@ public class Server {
 
 
     /**
-     * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @project QuizTime
+     * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @version 1.4
+     *
      * This class is a thread which controls the different connections made to the server.
      */
     private class Connection extends Thread {
@@ -93,23 +96,20 @@ public class Server {
                         e.printStackTrace();
 
                     }
-
-                    /*
-                    while (allReady() == false) {
-
-                        sleep(500);
-
-                    }*/
                 }
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-
+    /**
+     * @project QuizTime
+     * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @version 1.4
+     *
+     * This class is a thread which checks if all players are ready to play.
+     */
     private class StatusChecker extends Thread {
 
         public void run() {
@@ -133,7 +133,6 @@ public class Server {
             }
         }
 
-
         public boolean allReady() {
 
             if (userLinkedList.size() < 1) {
@@ -152,15 +151,15 @@ public class Server {
 
 
     /**
-     * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @project QuizTime
+     * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @version 1.4
+     * 
      * This class handles the different clients and adds user data.
      */
     private class clientHandler extends Thread {
 
         private Socket socket;
-        private DataOutputStream dos;
-
-        private int index = 0;
 
         private DataOutputStream dataOutputStream;
         private ObjectOutputStream outputStream;
@@ -171,9 +170,7 @@ public class Server {
             this.socket = socket;
 
             start();
-
         }
-
 
         /**
          * Initializes a new ObjectInputStream and socket gets InputStream.
@@ -245,11 +242,11 @@ public class Server {
      */
     private class QuestionSender extends Thread {
 
-        Object object = new Object();
-
         /**
          * Initializes a new ObjectOutputStream and tells the socket to get the OutputStream.
          * Writes the gameQuestions class with it's different index 10 times in a for-loop.
+         * The class has two constructions because if you play alone, certain things
+         * should happen and if you play with friends other things should happened.
          *
          * @param socket
          * @throws IOException
@@ -258,9 +255,7 @@ public class Server {
         //For playAlone
         public QuestionSender(Socket socket) throws IOException, ClassNotFoundException {
 
-
             try {
-
 
                 for (int i = 0; i < 10; i++) {
 
@@ -274,12 +269,10 @@ public class Server {
             }
         }
 
+        //For Play with friends
         public QuestionSender() {
 
             checking = false;
-
-
-            System.out.println("quiestionsender skapas");
 
             try {
 
