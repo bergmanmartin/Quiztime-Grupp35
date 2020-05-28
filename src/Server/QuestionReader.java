@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -30,6 +29,7 @@ public class QuestionReader {
     /**
      * Reads the files "Questions" and takes every line in order and fills it in an array.
      * Fills the Questions class with the lines read from the textfile.
+     * Randomize the questions that should be in the game.
      */
     public QuestionReader(){
 

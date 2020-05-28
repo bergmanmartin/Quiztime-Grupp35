@@ -1,15 +1,11 @@
 package Server;
 
-
 import SharedResources.Questions;
 import SharedResources.User;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Random;
 
 /**
  * @project QuizTime
@@ -30,10 +26,7 @@ public class Server {
 
     private LinkedList<clientHandler> clientHandlers;
 
-
     private boolean allnotReady = true;
-
-    private boolean gameStarted = false;
 
     private boolean checking = true;
 
@@ -104,8 +97,6 @@ public class Server {
 
                     }
                 }
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -160,15 +151,15 @@ public class Server {
 
 
     /**
-     * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @project QuizTime
+     * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+     * @version 1.4
+     * 
      * This class handles the different clients and adds user data.
      */
     private class clientHandler extends Thread {
 
         private Socket socket;
-        private DataOutputStream dos;
-
-        private int index = 0;
 
         private DataOutputStream dataOutputStream;
         private ObjectOutputStream outputStream;
@@ -179,9 +170,7 @@ public class Server {
             this.socket = socket;
 
             start();
-
         }
-
 
         /**
          * Initializes a new ObjectInputStream and socket gets InputStream.
@@ -253,11 +242,11 @@ public class Server {
      */
     private class QuestionSender extends Thread {
 
-        Object object = new Object();
-
         /**
          * Initializes a new ObjectOutputStream and tells the socket to get the OutputStream.
          * Writes the gameQuestions class with it's different index 10 times in a for-loop.
+         * The class has two constructions because if you play alone, certain things
+         * should happen and if you play with friends other things should happened.
          *
          * @param socket
          * @throws IOException
@@ -266,9 +255,7 @@ public class Server {
         //For playAlone
         public QuestionSender(Socket socket) throws IOException, ClassNotFoundException {
 
-
             try {
-
 
                 for (int i = 0; i < 10; i++) {
 
@@ -282,12 +269,10 @@ public class Server {
             }
         }
 
+        //For Play with friends
         public QuestionSender() {
 
             checking = false;
-
-
-            System.out.println("quiestionsender skapas");
 
             try {
 
