@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * @Author Markus Gerdtsson,Marianne Mukanga, Martin Bergman och Erik Nielsen.
@@ -16,6 +19,12 @@ import java.io.IOException;
 public class QuestionReader {
 
     private Questions[] questions;
+
+    private Questions[] thisQuestions;
+
+    private LinkedList<Integer> questionNumbers = new LinkedList<>();
+
+    private Random random = new Random();
 
 
     /**
@@ -31,11 +40,24 @@ public class QuestionReader {
 
             questions = new Questions[numOfLines];
 
+            thisQuestions = new Questions[10];
+
             for (int i = 0; i < numOfLines; i++){
 
                 Questions newQuestion = new Questions(reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine());
 
                 questions[i] = newQuestion;
+
+            }
+
+            int counter = 0;
+            while (counter < 10){
+
+                int a = random.nextInt(83);
+                questionNumbers.add(a);
+
+                thisQuestions[counter] = questions[a];
+                counter ++;
 
             }
 
@@ -53,6 +75,7 @@ public class QuestionReader {
      * @return questions.
      */
     public Questions[] getQuestions() {
-        return questions;
+
+        return thisQuestions;
     }
 }

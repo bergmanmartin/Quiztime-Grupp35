@@ -7,7 +7,9 @@ import SharedResources.User;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * @Author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
@@ -24,11 +26,13 @@ public class Server {
 
     private LinkedList<clientHandler> clientHandlers;
 
+
     private boolean allnotReady = true;
 
     private boolean gameStarted = false;
 
     private boolean checking = true;
+
 
 
     /**
@@ -49,7 +53,6 @@ public class Server {
         userLinkedList = new LinkedList<>();
 
         clientHandlers = new LinkedList<>();
-
 
         new StatusChecker().start();
 
@@ -93,13 +96,6 @@ public class Server {
                         e.printStackTrace();
 
                     }
-
-                    /*
-                    while (allReady() == false) {
-
-                        sleep(500);
-
-                    }*/
                 }
 
 

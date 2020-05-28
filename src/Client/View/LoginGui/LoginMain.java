@@ -8,11 +8,5 @@ public class LoginMain {
         new LoginController();
 
 
-
-
-
-
-
-
     }
 }
