@@ -11,10 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * @author Markus Gerdtsson, Marianne Mukanga, Martin Bergman och Erik Nielsen.
+ * This class contains the gui for the LoginFrame.
+ * @version 1.4
  */
+
 public class MainSecondFrame {
 
     private SharedResources.User user;
@@ -33,6 +34,10 @@ public class MainSecondFrame {
     private JRadioButton playWithFriendsButton;
 
 
+    /**
+     * Sets up and initializes the JFrame.
+     * @param user The User object.
+     */
     public MainSecondFrame(User user){
 
         this.user = user;
@@ -55,6 +60,9 @@ public class MainSecondFrame {
 
     }
 
+    /**
+     * Sets up and initializes the topLeftPanel and adds gui components.
+     */
     public void topLeft(){
 
         topleftPanel = new JPanel();
@@ -79,6 +87,9 @@ public class MainSecondFrame {
         frame.add(topleftPanel);
     }
 
+    /**
+     * Sets up and initializes the topRightPanel and adds gui components.
+     */
     public void topRight() {
         toprightPanel = new JPanel();
 
@@ -103,6 +114,10 @@ public class MainSecondFrame {
         frame.add(toprightPanel);
     }
 
+    /**
+     * Sets up and initializes the bottomLeftPanel and adds gui components.
+     * Starts and initializes Client connection to server.
+     */
     public void bottomLeft() {
 
         bottomLeftPanel = new JPanel();
@@ -155,6 +170,9 @@ public class MainSecondFrame {
         frame.add(bottomLeftPanel);
     }
 
+    /**
+     * Sets up and initializes the bottomRightPanel and adds gui components.
+     */
     public void bottomRight() {
 
         bottomRightPanel = new JPanel();
