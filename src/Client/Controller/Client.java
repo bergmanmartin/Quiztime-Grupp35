@@ -226,10 +226,10 @@ public class Client {
 
                     newQuestions(counterOfQuestion);
 
-                    sleep(1000);
+                    sleep(10000);
 
                     getAlternative(counterOfQuestion);
-                    sleep(150);
+                    sleep(1500);
 
 
                     //gameface.getSelectedKnapp().setSelected(false);
