@@ -39,24 +39,6 @@ public class LoginController {
 
 
     /**
-     * Checks if the user input isn't empty.
-     * If so shows messageDialog.
-     */
-    public void emptyUsername() {
-        if (loginFrame.getUsernname().equals("")) {
-            JOptionPane.showMessageDialog(null, "Invalid username");
-        }
-    }
-
-    //Används ej
-    public void invalidCharacters() {
-        String username = loginFrame.getUsernname();
-        for (int i = 0; i < username.length(); i++) {
-        }
-    }
-
-
-    /**
      * Checks if the filePath selected is valid and returns the filePath
      * @return
      */
@@ -71,12 +53,6 @@ public class LoginController {
             }
         }
         return filePath;
-    }
-
-
-    //Används ej
-    public SharedResources.User getUser() {
-        return user;
     }
 
 }
