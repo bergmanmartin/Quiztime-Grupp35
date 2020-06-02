@@ -1,15 +1,18 @@
 package Client.View;
 
-/**
- * This class represents the game and its functions. Handles the selcted alternatives and other progression
- * throughout the game.
- * @author Markus Gerdtsson
- * @version 1.0
- */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * @project Quiztime
+ * @author Markus Gerdtsson, Erik Nielsen, Marianne Mukanga, Martin Bergman
+ * @version 1.4
+ *
+ * Class that is the frame for the game. This is the frame where the question with answer alternatives appear.
+ */
 
 public class Gameface extends JFrame {
     //JPanels
@@ -121,10 +124,9 @@ public class Gameface extends JFrame {
             int i = 0;
             try {
                 while (i <= 100) {
-                    // fill the menu bar
+
                     jProgressBar.setValue(i);
 
-                    // delay the thread
                     Thread.sleep(1000);
                     i += 10;
 
@@ -152,15 +154,12 @@ public class Gameface extends JFrame {
         }
         selectedButton = new JButton();
 
-
         question.setText(question1);
 
         firstAlternative.setText(alternative1);
         secondAlternative.setText(alternative2);
         thirdAlternative.setText(alternative3);
         forthAlternative.setText(alternative4);
-
-
 
         FillThread fillThread = new FillThread();
         fillThread.start();
@@ -194,7 +193,6 @@ public class Gameface extends JFrame {
                 selectedButton = secondAlternative;
                 setSelectedButton(selectedButton);
                 secondAlternative.setSelected(true);
-
             }
 
         });
@@ -222,20 +220,13 @@ public class Gameface extends JFrame {
                 setSelectedButton(selectedButton);
                 forthAlternative.setSelected(true);
             }
-
         });
-
-
-
-
-
     }
 
     /**
      * Deselects the button for the next question.
      */
     public void removeOldSelectedButton(){
-
         selectedButton.setBackground(null);
         selectedButton.setSelected(false);
     }
@@ -245,11 +236,8 @@ public class Gameface extends JFrame {
      * @param selectedButton
      */
     public void setSelectedButton(JButton selectedButton){
-
         selectedButton.setBackground(Color.yellow);
     }
-
-
 
     /**
      * Returnns the text in the selected button.
@@ -267,7 +255,6 @@ public class Gameface extends JFrame {
         secondAlternative.setSelected(false);
         thirdAlternative.setSelected(false);
         forthAlternative.setSelected(false);
-
     }
 
     public void setColorToGreenJButton(){
@@ -276,7 +263,6 @@ public class Gameface extends JFrame {
 
     public void setColorToRedJButton(){
         selectedButton.setBackground(Color.RED);
-
     }
 }
 
