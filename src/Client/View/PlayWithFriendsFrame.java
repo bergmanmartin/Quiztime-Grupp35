@@ -16,6 +16,7 @@ import java.io.IOException;
  * @project Quiztime
  * @author Martin Bergman, Marianne Mukagana, Markus Gerdtsson, Erik Nielsen.
  * @version 1.4
+ * Class that shows the multiplayer frame where everyone can press ready.
  */
 public class PlayWithFriendsFrame {
 
