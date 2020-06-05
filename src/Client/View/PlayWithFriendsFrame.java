@@ -10,18 +10,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 /**
- * @Created 11/02/2020
- * @project P1
- * @Markus Gerdtsson
+ * @project Quiztime
+ * @author Martin Bergman, Marianne Mukagana, Markus Gerdtsson, Erik Nielsen.
+ * @version 1.4
+ * Class that shows the multiplayer frame where everyone can press ready.
  */
 public class PlayWithFriendsFrame {
 
     private Client client;
 
-    private SharedResources.User user;
+    private User user;
 
     private JFrame frame;
 
@@ -33,15 +34,9 @@ public class PlayWithFriendsFrame {
     private JButton readyButton;
     private JButton quitButton;
 
-
     private JList list;
 
-    private Thread thread;
-
-    private ArrayList<User> users;
-
-    DefaultListModel<String> listModel = new DefaultListModel<>();
-
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
 
     public PlayWithFriendsFrame(Client client, SharedResources.User user){
 
@@ -53,7 +48,7 @@ public class PlayWithFriendsFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(2,2));
         frame.setTitle("QuizTime");
-        //Fill JFrame
+
         topLeft();
         topRight();
         bottomLeft();
@@ -62,11 +57,11 @@ public class PlayWithFriendsFrame {
         frame.setVisible(true);
         frame.setResizable(false);            // Prevent user from change size
         frame.setLocationRelativeTo(null);    // Start middle screen
-
-
-
     }
 
+    /**
+     * Constructs the top left part of the frame.
+     */
     public void topLeft(){
 
         topleftPanel = new JPanel();
@@ -88,16 +83,17 @@ public class PlayWithFriendsFrame {
         frame.add(topleftPanel);
     }
 
+    /**
+     * Constructs the top right part of the frame.
+     */
     public void topRight() {
         toprightPanel = new JPanel();
-
 
         toprightPanel.setBorder(BorderFactory.createTitledBorder(" Contact Register "));
 
         toprightPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 
         list = new JList<>(listModel);
-
 
         Font font = new Font("SansSerif Bold", Font.BOLD, 20);
         list.setFont(font);
@@ -109,16 +105,15 @@ public class PlayWithFriendsFrame {
         frame.add(toprightPanel);
     }
 
+    /**
+     * Construcs the components of the bottom left part of the frame.
+     * Method where the players can select if they are ready.
+     */
     public void bottomLeft() {
 
         bottomLeftPanel = new JPanel();
         bottomLeftPanel.setLayout(new GridLayout(2,2));
         bottomLeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-
-        //RadioButtons + button group
-
-
-        ButtonGroup btngroup = new ButtonGroup();
 
         //Start and quit buttons
         readyButton = new JButton("Ready");
@@ -130,7 +125,6 @@ public class PlayWithFriendsFrame {
         quitButton.setPreferredSize(new Dimension(200, 60));
         quitButton.setForeground(Color.RED);
         bottomLeftPanel.add(quitButton);
-
 
         readyButton.addActionListener(new ActionListener() {
 
@@ -145,30 +139,36 @@ public class PlayWithFriendsFrame {
 
             }
         });
-
         frame.add(bottomLeftPanel);
     }
 
+    /**
+     * Constructs the filler panel for the bottom right part of the frame
+     */
     public void bottomRight() {
-
         bottomRightPanel = new JPanel();
-
         frame.add(bottomRightPanel);
     }
 
-
+    /**
+     * Updates the userlist.
+     * @param s
+     */
     public void updateList(String s){
-
         listModel.addElement(s);
-
     }
 
+    /**
+     * Clears the userlist.
+     */
     public void clearList() {
         listModel.clear();
     }
 
-    public void Close(){
+    /**
+     * Closes the frame
+     */
+    public void close(){
         frame.setVisible(false);
     }
-
 }
